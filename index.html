@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Hair Passport</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    :root {
+      --bg: var(--tg-theme-bg-color, #ffffff);
+      --text: var(--tg-theme-text-color, #111111);
+      --hint: var(--tg-theme-hint-color, #777777);
+      --button: var(--tg-theme-button-color, #111111);
+      --button-text: var(--tg-theme-button-text-color, #ffffff);
+      --secondary: var(--tg-theme-secondary-bg-color, #f3f3f3);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 0 90px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .app {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 24px 20px 14px;
+    }
+
+    .eyebrow {
+      color: var(--hint);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .welcome {
+      margin-top: 8px;
+      color: var(--hint);
+      font-size: 15px;
+    }
+
+    main {
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: var(--secondary);
+      border-radius: 22px;
+      padding: 22px;
+      margin: 8px 0 18px;
+    }
+
+    .hero h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--hint);
+      line-height: 1.45;
+    }
+
+    .section {
+      margin: 20px 0;
+    }
+
+    .section h3 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .card {
+      background: var(--secondary);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 10px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+    }
+
+    .label {
+      color: var(--hint);
+    }
+
+    .value {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    button.primary {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 15px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      background: var(--button);
+      color: var(--button-text);
+      cursor: pointer;
+    }
+
+    .passport-avatar {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 14px;
+      background: var(--secondary);
+    }
+
+    .tabs {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+      background: var(--bg);
+      border-top: 1px solid rgba(127,127,127,.15);
+    }
+
+    .tabs-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      display: grid;
+      gap: 6px;
+    }
+
+    .tab {
+      border: 0;
+      background: transparent;
+      color: var(--hint);
+      border-radius: 12px;
+      padding: 10px 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      color: var(--text);
+      background: var(--secondary);
+      font-weight: 700;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .note {
+      color: var(--hint);
+      font-size: 13px;
+      line-height: 1.4;
+      margin-top: 12px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: rgba(0,0,0,.45);
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 700px;
+      background: var(--bg);
+      border-radius: 24px 24px 0 0;
+      padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+    }
+
+    .modal-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .close {
+      margin-top: 10px;
+      width: 100%;
+      border: 0;
+      background: var(--secondary);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 15px;
+    }
+
+    .master-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--secondary);
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <header>
+      <div class="eyebrow">DIGITAL HAIR EXPERIENCE</div>
+      <h1>Hair Passport</h1>
+      <div class="welcome" id="welcome">Добро пожаловать 👋</div>
+    </header>
+
+    <main>
+
+      <!-- ГЛАВНАЯ -->
+      <section id="page-home" class="page active">
+        <div class="hero">
+          <h2>Ваш мастер и ваша история волос</h2>
+          <p>
+            Здесь позже появятся услуги, цены, рекомендации, материалы
+            и полноценная онлайн-запись.
+          </p>
+        </div>
+
+        <div class="section">
+          <h3>Услуги</h3>
+
+          <div class="card">
+            <div class="row">
+              <span class="label">Стрижка</span>
+              <span class="value">от 1 часа</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="row">
+              <span class="label">Тонирование</span>
+              <span class="value">по записи</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="row">
+              <span class="label">Окрашивание</span>
+              <span class="value">по записи</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="primary" onclick="openBooking()">Записаться</button>
+
+        <div class="note">
+          Это первая тестовая версия. Сейчас проверяем саму механику Mini App.
+        </div>
+      </section>
+
+      <!-- ПАСПОРТ -->
+      <section id="page-passport" class="page">
+        <div class="section">
+          <h3>My Digital Hair Passport</h3>
+
+          <div class="card">
+            <img id="avatar" class="passport-avatar" alt="Аватар">
+            <div class="row">
+              <span class="label">Имя</span>
+              <span class="value" id="passport-name">—</span>
+            </div>
+            <div class="row">
+              <span class="label">Тип волос</span>
+              <span class="value">Не заполнено</span>
+            </div>
+            <div class="row">
+              <span class="label">Тип лица</span>
+              <span class="value">Не заполнено</span>
+            </div>
+            <div class="row">
+              <span class="label">Цвет волос</span>
+              <span class="value">Не заполнено</span>
+            </div>
+            <div class="row">
+              <span class="label">Рекомендации</span>
+              <span class="value">Появятся позже</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- КАРТА МАСТЕРА -->
+      <section id="page-master" class="page">
+        <div class="section">
+          <span class="master-badge">MASTER MODE</span>
+          <h3>Карта мастера</h3>
+
+          <div class="card">
+            <div class="row">
+              <span class="label">Любимый напиток</span>
+              <span class="value">Кофе</span>
+            </div>
+            <div class="row">
+              <span class="label">Последний визит</span>
+              <span class="value">—</span>
+            </div>
+            <div class="row">
+              <span class="label">Количество визитов</span>
+              <span class="value">0</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <strong>История процедур</strong>
+            <p class="note">
+              Здесь позже будет история клиента из Google Sheets.
+            </p>
+          </div>
+
+          <div class="card">
+            <strong>Заметки мастера</strong>
+            <p class="note">
+              Здесь позже появятся персональные заметки по клиенту.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="tabs">
+      <div class="tabs-inner" id="tabs-inner">
+        <button class="tab active" onclick="showPage('home', this)">🏠<br>Главная</button>
+        <button class="tab" onclick="showPage('passport', this)">💇<br>Passport</button>
+        <button class="tab" id="master-tab" onclick="showPage('master', this)">👑<br>Карта мастера</button>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- BOOKING MODAL -->
+  <div class="modal" id="booking-modal" onclick="closeBooking(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <h3>Запись</h3>
+      <p class="note">
+        На следующем этапе здесь сделаем настоящий выбор услуги,
+        длины волос, даты и времени.
+      </p>
+      <button class="primary" onclick="fakeBooking()">Выбрать услугу</button>
+      <button class="close" onclick="closeBooking()">Закрыть</button>
+    </div>
+  </div>
+
+  <script>
+    /*
+      ВАЖНО:
+      Сейчас включён тестовый режим мастера.
+      Позже этот переключатель полностью уберём и роль будет
+      определяться на сервере по Telegram ID мастера.
+    */
+    const TEST_MASTER_MODE = true;
+
+    const tg = window.Telegram && window.Telegram.WebApp
+      ? window.Telegram.WebApp
+      : null;
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
+    }
+
+    const user = tg && tg.initDataUnsafe
+      ? tg.initDataUnsafe.user
+      : null;
+
+    function initUser() {
+      if (!user) return;
+
+      const firstName = user.first_name || "Гость";
+      document.getElementById("welcome").textContent =
+        `Привет, ${firstName} 👋`;
+
+      document.getElementById("passport-name").textContent =
+        [user.first_name, user.last_name].filter(Boolean).join(" ");
+
+      const avatar = document.getElementById("avatar");
+
+      if (user.photo_url) {
+        avatar.src = user.photo_url;
+      } else {
+        avatar.style.display = "none";
+      }
+    }
+
+    function setupRole() {
+      const masterTab = document.getElementById("master-tab");
+
+      if (!TEST_MASTER_MODE) {
+        masterTab.style.display = "none";
+        document.getElementById("page-master").classList.remove("active");
+      }
+    }
+
+    function showPage(page, button) {
+      document.querySelectorAll(".page").forEach(el => {
+        el.classList.remove("active");
+      });
+
+      document.getElementById("page-" + page).classList.add("active");
+
+      document.querySelectorAll(".tab").forEach(el => {
+        el.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openBooking() {
+      document.getElementById("booking-modal").classList.add("show");
+    }
+
+    function closeBooking(event) {
+      if (!event || event.target.id === "booking-modal") {
+        document.getElementById("booking-modal").classList.remove("show");
+      }
+    }
+
+    function fakeBooking() {
+      if (tg && tg.showPopup) {
+        tg.showPopup({
+          title: "Тест записи",
+          message: "Механика работает. Настоящую запись подключим следующим этапом.",
+          buttons: [{ type: "ok" }]
+        });
+      } else {
+        alert("Механика работает. Настоящую запись подключим следующим этапом.");
+      }
+    }
+
+    initUser();
+    setupRole();
+  </script>
+</body>
+</html>
