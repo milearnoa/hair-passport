@@ -3,953 +3,1245 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  >
 
-<title>Hair Passport</title>
+  <title>Hair Passport</title>
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Telegram Mini App -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-<style>
 
-* {
-  box-sizing: border-box;
-}
+  <style>
 
-body {
+    :root {
 
-  margin: 0;
+      --bg: #f7f6f3;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #777777;
+      --line: #e8e6e1;
+      --accent: #171717;
+      --soft: #efede8;
+      --white: #ffffff;
 
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "SF Pro Text",
-    Arial,
-    sans-serif;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
 
-  background: #f7f6f3;
+    }
 
-  color: #171717;
 
-  padding-bottom: 100px;
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-}
 
-button {
+    html,
+    body {
 
-  font: inherit;
+      margin: 0;
+      padding: 0;
 
-}
+      width: 100%;
+      min-height: 100%;
 
-.container {
+      background: var(--bg);
+      color: var(--text);
 
-  width: 100%;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
 
-  max-width: 700px;
+    }
 
-  margin: 0 auto;
 
-  padding: 20px;
+    body {
 
-}
+      overflow-x: hidden;
 
+    }
 
-/* =========================================
-   HEADER
-========================================= */
 
-.brand {
+    button {
 
-  text-align: center;
+      font: inherit;
 
-  padding: 12px 0 22px;
+    }
 
-}
 
-.brand-title {
+    #app {
 
-  font-size: 13px;
+      min-height: 100vh;
 
-  letter-spacing: 3px;
+      padding-bottom: 90px;
 
-  font-weight: 600;
+    }
 
-}
 
-.brand-subtitle {
+    /* =========================================
+       HEADER
+       ========================================= */
 
-  margin-top: 7px;
+    .top-header {
 
-  font-size: 11px;
+      padding:
+        calc(18px + env(safe-area-inset-top))
+        20px
+        14px
+        20px;
 
-  color: #888;
+    }
 
-  letter-spacing: 1px;
 
-}
+    .brand {
 
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
 
-/* =========================================
-   TABS
-========================================= */
+      color: var(--muted);
 
-.tabs {
+      margin-bottom: 8px;
 
-  display: flex;
+    }
 
-  gap: 6px;
 
-  background: #eae8e3;
+    .page-title {
 
-  padding: 4px;
+      margin: 0;
 
-  border-radius: 14px;
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 600;
 
-  margin-bottom: 24px;
+      letter-spacing: -0.04em;
 
-}
+    }
 
-.tab {
 
-  flex: 1;
+    /* =========================================
+       PAGES
+       ========================================= */
 
-  border: 0;
+    .page {
 
-  background: transparent;
+      display: none;
 
-  padding: 11px 7px;
+      padding: 0 16px 24px;
 
-  border-radius: 11px;
+    }
 
-  font-size: 12px;
 
-  color: #777;
+    .page.active {
 
-}
+      display: block;
 
-.tab.active {
+    }
 
-  background: #fff;
 
-  color: #111;
+    /* =========================================
+       HERO
+       ========================================= */
 
-  box-shadow:
-    0 2px 8px rgba(0,0,0,.05);
+    .hero {
 
-}
+      margin: 8px 0 22px;
 
+      background: var(--card);
 
-/* =========================================
-   HERO
-========================================= */
+      border-radius: var(--radius-lg);
 
-.hero {
+      padding: 26px 22px;
 
-  background: #fff;
+    }
 
-  border-radius: 22px;
 
-  padding: 28px 22px;
+    .hero-title {
 
-  margin-bottom: 22px;
+      margin: 0 0 10px;
 
-}
+      font-size: 28px;
+      line-height: 1.08;
 
-.hero h1 {
+      letter-spacing: -0.04em;
 
-  margin: 0 0 10px;
+    }
 
-  font-size: 27px;
 
-  font-weight: 500;
+    .hero-text {
 
-  line-height: 1.15;
+      margin: 0;
 
-}
+      color: var(--muted);
 
-.hero p {
+      font-size: 15px;
+      line-height: 1.55;
 
-  margin: 0;
+    }
 
-  color: #777;
 
-  line-height: 1.5;
+    /* =========================================
+       SECTION
+       ========================================= */
 
-  font-size: 14px;
+    .section {
 
-}
+      margin-top: 24px;
 
+    }
 
-/* =========================================
-   SECTION
-========================================= */
 
-.section-title {
+    .section-header {
 
-  font-size: 13px;
+      display: flex;
 
-  text-transform: uppercase;
+      align-items: center;
+      justify-content: space-between;
 
-  letter-spacing: 1.5px;
+      margin-bottom: 12px;
 
-  color: #888;
+    }
 
-  margin:
 
-    25px
-    4px
-    12px;
+    .section-title {
 
-}
+      margin: 0;
 
+      font-size: 20px;
+      font-weight: 600;
 
-/* =========================================
-   SERVICES
-========================================= */
+      letter-spacing: -0.02em;
 
-.service-card {
+    }
 
-  background: #fff;
 
-  border-radius: 18px;
+    .section-caption {
 
-  margin-bottom: 10px;
+      font-size: 12px;
 
-  overflow: hidden;
+      color: var(--muted);
 
-}
+    }
 
-.service-main {
 
-  width: 100%;
+    /* =========================================
+       SERVICES
+       ========================================= */
 
-  border: 0;
+    .services-list {
 
-  background: transparent;
+      display: flex;
 
-  padding: 17px;
+      flex-direction: column;
 
-  text-align: left;
+      gap: 10px;
 
-  display: flex;
+    }
 
-  align-items: center;
 
-  justify-content: space-between;
+    .service-card {
 
-}
+      background: var(--card);
 
-.service-name {
+      border-radius: var(--radius-md);
 
-  font-size: 16px;
+      overflow: hidden;
 
-}
+    }
 
-.service-arrow {
 
-  color: #999;
+    .service-main {
 
-  transition: .2s;
+      width: 100%;
 
-}
+      border: 0;
+      background: transparent;
 
-.service-card.open
-.service-arrow {
+      padding: 19px;
 
-  transform:
-    rotate(180deg);
+      display: flex;
 
-}
+      align-items: center;
+      justify-content: space-between;
 
-.lengths {
+      text-align: left;
 
-  display: none;
+      cursor: pointer;
 
-  border-top:
-    1px solid #eee;
+      color: var(--text);
 
-  padding: 8px;
+    }
 
-}
 
-.service-card.open
-.lengths {
+    .service-main:active {
 
-  display: block;
+      background: var(--soft);
 
-}
+    }
 
-.length-button {
 
-  width: 100%;
+    .service-name {
 
-  display: flex;
+      font-size: 17px;
 
-  align-items: center;
+      font-weight: 500;
 
-  justify-content: space-between;
+      line-height: 1.25;
 
-  border: 0;
+    }
 
-  background: transparent;
 
-  padding: 13px 10px;
+    .service-subtitle {
 
-  border-radius: 10px;
+      margin-top: 5px;
 
-}
+      font-size: 13px;
 
-.length-button:active {
+      color: var(--muted);
 
-  background: #f5f4f1;
+    }
 
-}
 
-.length-name {
+    .service-arrow {
 
-  font-size: 14px;
+      width: 30px;
+      height: 30px;
 
-}
+      border-radius: 50%;
 
-.length-price {
+      background: var(--soft);
 
-  font-size: 13px;
+      display: flex;
 
-  color: #555;
+      align-items: center;
+      justify-content: center;
 
-}
+      flex-shrink: 0;
 
+      transition: transform 0.2s ease;
 
-/* =========================================
-   BOTTOM BUTTON
-========================================= */
+    }
 
-.book-fixed {
 
-  position: fixed;
+    .service-card.open
+    .service-arrow {
 
-  left: 20px;
+      transform: rotate(180deg);
 
-  right: 20px;
+    }
 
-  bottom: 18px;
 
-  z-index: 50;
+    .service-options {
 
-  max-width: 660px;
+      display: none;
 
-  margin: auto;
+      padding: 0 12px 12px;
 
-}
+    }
 
-.book-fixed button {
 
-  width: 100%;
+    .service-card.open
+    .service-options {
 
-  border: 0;
+      display: flex;
 
-  background: #171717;
+      flex-direction: column;
 
-  color: #fff;
+      gap: 8px;
 
-  padding: 16px;
+    }
 
-  border-radius: 16px;
 
-  font-size: 15px;
+    .length-option {
 
-  font-weight: 500;
+      width: 100%;
 
-  box-shadow:
-    0 8px 30px
-    rgba(0,0,0,.18);
+      border: 1px solid var(--line);
 
-}
+      background: #fafafa;
 
+      border-radius: 14px;
 
-/* =========================================
-   PASSPORT
-========================================= */
+      padding: 15px;
 
-.passport {
+      display: flex;
 
-  background: #fff;
+      align-items: center;
+      justify-content: space-between;
 
-  border-radius: 22px;
+      text-align: left;
 
-  padding: 24px;
+      cursor: pointer;
 
-}
+    }
 
-.avatar {
 
-  width: 80px;
+    .length-option:active {
 
-  height: 80px;
+      background: var(--soft);
 
-  border-radius: 50%;
+    }
 
-  object-fit: cover;
 
-  display: block;
+    .length-left {
 
-  margin-bottom: 15px;
+      min-width: 0;
 
-}
+    }
 
-.passport-name {
 
-  font-size: 22px;
+    .length-name {
 
-  margin-bottom: 20px;
+      font-size: 15px;
 
-}
+      font-weight: 500;
 
-.info-row {
+    }
 
-  padding: 13px 0;
 
-  border-bottom:
-    1px solid #eee;
+    .length-description {
 
-}
+      margin-top: 4px;
 
-.info-label {
+      font-size: 12px;
 
-  color: #999;
+      color: var(--muted);
 
-  font-size: 12px;
+    }
 
-  margin-bottom: 4px;
 
-}
+    .length-right {
 
-.info-value {
+      text-align: right;
 
-  font-size: 14px;
+      flex-shrink: 0;
 
-}
+      margin-left: 12px;
 
+    }
 
-/* =========================================
-   MASTER
-========================================= */
 
-.master-card {
+    .length-price {
 
-  background: #fff;
+      font-size: 16px;
 
-  border-radius: 22px;
+      font-weight: 600;
 
-  padding: 24px;
+    }
 
-}
 
-.hidden {
+    .length-duration {
 
-  display: none !important;
+      margin-top: 3px;
 
-}
+      font-size: 11px;
 
+      color: var(--muted);
 
-/* =========================================
-   MODAL
-========================================= */
+    }
 
-.modal {
 
-  position: fixed;
+    /* =========================================
+       BOOKING
+       ========================================= */
 
-  inset: 0;
+    .booking-button {
 
-  z-index: 100;
+      width: 100%;
 
-  background:
-    rgba(0,0,0,.35);
+      border: 0;
 
-  display: none;
+      background: var(--accent);
+      color: var(--white);
 
-  align-items: flex-end;
+      border-radius: 16px;
 
-}
+      padding: 17px 20px;
 
-.modal.open {
+      font-size: 15px;
+      font-weight: 600;
 
-  display: flex;
+      cursor: pointer;
 
-}
+    }
 
-.modal-content {
 
-  width: 100%;
+    .booking-button:active {
 
-  max-width: 700px;
+      opacity: 0.8;
 
-  margin: auto auto 0;
+    }
 
-  background: #f7f6f3;
 
-  border-radius:
-    24px
-    24px
-    0
-    0;
+    .booking-fixed {
 
-  padding: 24px;
+      position: fixed;
 
-  max-height: 90vh;
+      left: 16px;
+      right: 16px;
 
-  overflow-y: auto;
+      bottom:
+        calc(70px + env(safe-area-inset-bottom));
 
-}
+      z-index: 20;
 
-.modal-title {
+    }
 
-  font-size: 22px;
 
-  margin-bottom: 7px;
+    /* =========================================
+       INFO CARD
+       ========================================= */
 
-}
+    .info-card {
 
-.modal-subtitle {
+      background: var(--card);
 
-  color: #888;
+      border-radius: var(--radius-md);
 
-  font-size: 13px;
+      padding: 20px;
 
-  margin-bottom: 20px;
+    }
 
-}
 
-.close-button {
+    .info-row {
 
-  width: 100%;
+      display: flex;
 
-  border: 0;
+      justify-content: space-between;
 
-  background: #e9e7e2;
+      gap: 20px;
 
-  padding: 14px;
+      padding: 12px 0;
 
-  border-radius: 14px;
+      border-bottom: 1px solid var(--line);
 
-  margin-top: 10px;
+    }
 
-}
 
+    .info-row:last-child {
 
-/* =========================================
-   BOOKING STEPS
-========================================= */
+      border-bottom: 0;
 
-.booking-step {
+    }
 
-  display: none;
 
-}
+    .info-label {
 
-.booking-step.active {
+      color: var(--muted);
 
-  display: block;
+      font-size: 13px;
 
-}
+    }
 
-.back-button {
 
-  border: 0;
+    .info-value {
 
-  background: transparent;
+      text-align: right;
 
-  padding: 0;
+      font-size: 14px;
 
-  margin-bottom: 18px;
+    }
 
-  color: #777;
 
-}
+    /* =========================================
+       PASSPORT
+       ========================================= */
 
-.booking-title {
+    .passport-header {
 
-  font-size: 25px;
+      background: var(--card);
 
-  margin-bottom: 7px;
+      border-radius: var(--radius-lg);
 
-}
+      padding: 24px;
 
-.booking-description {
+      text-align: center;
 
-  color: #888;
+    }
 
-  font-size: 13px;
 
-  margin-bottom: 22px;
+    .avatar {
 
-}
+      width: 88px;
+      height: 88px;
 
+      margin: 0 auto 14px;
 
-/* =========================================
-   BOOKING OPTIONS
-========================================= */
+      border-radius: 50%;
 
-.option {
+      background: var(--soft);
 
-  width: 100%;
+      display: flex;
 
-  background: #fff;
+      align-items: center;
+      justify-content: center;
 
-  border: 1px solid #eee;
+      font-size: 30px;
 
-  border-radius: 16px;
+      overflow: hidden;
 
-  padding: 17px;
+    }
 
-  margin-bottom: 9px;
 
-  text-align: left;
+    .avatar img {
 
-}
+      width: 100%;
+      height: 100%;
 
-.option:active {
+      object-fit: cover;
 
-  background: #f0efec;
+    }
 
-}
 
-.option-title {
+    .passport-name {
 
-  font-size: 15px;
+      font-size: 22px;
 
-}
+      font-weight: 600;
 
-.option-meta {
+    }
 
-  color: #888;
 
-  font-size: 12px;
+    .passport-caption {
 
-  margin-top: 5px;
+      margin-top: 5px;
 
-}
+      color: var(--muted);
 
+      font-size: 13px;
 
-/* =========================================
-   DATE PICKER
-========================================= */
+    }
 
-.date-input {
 
-  width: 100%;
+    .passport-grid {
 
-  border: 0;
+      display: grid;
 
-  background: #fff;
+      grid-template-columns: 1fr 1fr;
 
-  border-radius: 16px;
+      gap: 10px;
 
-  padding: 17px;
+      margin-top: 12px;
 
-  font-size: 16px;
+    }
 
-  margin-bottom: 18px;
 
-}
+    .passport-item {
 
+      background: var(--card);
 
-/* =========================================
-   TIME SLOTS
-========================================= */
+      border-radius: 16px;
 
-.time-grid {
+      padding: 17px;
 
-  display: grid;
+    }
 
-  grid-template-columns:
-    repeat(2, 1fr);
 
-  gap: 9px;
+    .passport-item-label {
 
-}
+      color: var(--muted);
 
-.time-slot {
+      font-size: 12px;
 
-  border: 0;
+      margin-bottom: 8px;
 
-  background: #fff;
+    }
 
-  border-radius: 14px;
 
-  padding: 16px 10px;
+    .passport-item-value {
 
-  text-align: center;
+      font-size: 15px;
 
-}
+      font-weight: 500;
 
-.time-slot:active {
+    }
 
-  background: #e9e7e2;
 
-}
+    /* =========================================
+       MASTER CARD
+       ========================================= */
 
+    .master-list {
 
-/* =========================================
-   SUMMARY
-========================================= */
+      display: flex;
 
-.summary {
+      flex-direction: column;
 
-  background: #fff;
+      gap: 10px;
 
-  border-radius: 18px;
+    }
 
-  padding: 20px;
 
-}
+    .master-client {
 
-.summary-row {
+      background: var(--card);
 
-  display: flex;
+      border-radius: var(--radius-md);
 
-  justify-content: space-between;
+      padding: 18px;
 
-  gap: 20px;
+      cursor: pointer;
 
-  padding: 11px 0;
+    }
 
-  border-bottom:
-    1px solid #eee;
 
-}
+    .master-client-name {
 
-.summary-row:last-child {
+      font-size: 16px;
 
-  border-bottom: 0;
+      font-weight: 600;
 
-}
+    }
 
-.summary-label {
 
-  color: #888;
+    .master-client-meta {
 
-  font-size: 13px;
+      margin-top: 6px;
 
-}
+      font-size: 13px;
 
-.summary-value {
+      color: var(--muted);
 
-  font-size: 14px;
+    }
 
-  text-align: right;
 
-}
+    .master-empty {
 
-.confirm-button {
+      background: var(--card);
 
-  width: 100%;
+      border-radius: var(--radius-md);
 
-  border: 0;
+      padding: 22px;
 
-  background: #171717;
+      color: var(--muted);
 
-  color: #fff;
+      font-size: 14px;
 
-  padding: 17px;
+      line-height: 1.5;
 
-  border-radius: 15px;
+    }
 
-  margin-top: 15px;
 
-  font-size: 15px;
+    /* =========================================
+       BOTTOM NAV
+       ========================================= */
 
-}
+    .bottom-nav {
 
+      position: fixed;
 
-/* =========================================
-   LOADING
-========================================= */
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-.loading {
+      z-index: 30;
 
-  text-align: center;
+      padding:
+        8px
+        12px
+        calc(8px + env(safe-area-inset-bottom));
 
-  color: #999;
+      background: rgba(247, 246, 243, 0.94);
 
-  padding: 25px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
 
-}
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
 
+    }
 
-/* =========================================
-   EMPTY
-========================================= */
 
-.empty {
+    .nav-inner {
 
-  background: #fff;
+      max-width: 600px;
 
-  border-radius: 18px;
+      margin: 0 auto;
 
-  padding: 24px;
+      display: grid;
 
-  color: #888;
+      grid-template-columns: 1fr 1fr 1fr;
 
-  text-align: center;
+      gap: 6px;
 
-  font-size: 14px;
+    }
 
-}
 
+    .nav-button {
 
-/* =========================================
-   SUCCESS
-========================================= */
+      border: 0;
 
-.success {
+      background: transparent;
 
-  background: #fff;
+      color: var(--muted);
 
-  border-radius: 22px;
+      border-radius: 14px;
 
-  padding: 30px 22px;
+      padding: 9px 5px;
 
-  text-align: center;
+      cursor: pointer;
 
-}
+      font-size: 11px;
 
-.success-icon {
+      line-height: 1.2;
 
-  font-size: 38px;
+    }
 
-  margin-bottom: 15px;
 
-}
+    .nav-button.active {
 
-.success h2 {
+      background: var(--card);
 
-  margin: 0 0 8px;
+      color: var(--text);
 
-}
+    }
 
-.success p {
 
-  color: #888;
+    .nav-icon {
 
-  line-height: 1.5;
+      display: block;
 
-}
+      font-size: 18px;
 
-</style>
+      margin-bottom: 3px;
+
+    }
+
+
+    /* =========================================
+       LOADING
+       ========================================= */
+
+    .loading {
+
+      padding: 35px 20px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+    }
+
+
+    .error {
+
+      background: #fff;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      color: #8a2424;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* =========================================
+       MODAL
+       ========================================= */
+
+    .modal {
+
+      display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 100;
+
+      background: rgba(0, 0, 0, 0.35);
+
+      align-items: flex-end;
+
+    }
+
+
+    .modal.open {
+
+      display: flex;
+
+    }
+
+
+    .modal-content {
+
+      width: 100%;
+
+      max-height: 85vh;
+
+      overflow-y: auto;
+
+      background: var(--bg);
+
+      border-radius:
+        26px
+        26px
+        0
+        0;
+
+      padding:
+        20px
+        16px
+        calc(25px + env(safe-area-inset-bottom));
+
+      animation: slideUp 0.22s ease;
+
+    }
+
+
+    @keyframes slideUp {
+
+      from {
+
+        transform: translateY(100%);
+
+      }
+
+      to {
+
+        transform: translateY(0);
+
+      }
+
+    }
+
+
+    .modal-handle {
+
+      width: 38px;
+      height: 4px;
+
+      border-radius: 10px;
+
+      background: #d5d2cc;
+
+      margin: 0 auto 20px;
+
+    }
+
+
+    .modal-title {
+
+      font-size: 23px;
+
+      font-weight: 600;
+
+      letter-spacing: -0.03em;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .modal-description {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .modal-details {
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      padding: 17px;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .modal-detail-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 8px 0;
+
+    }
+
+
+    .modal-detail-label {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    .modal-detail-value {
+
+      font-size: 14px;
+
+      font-weight: 500;
+
+    }
+
+
+    .modal-close {
+
+      width: 100%;
+
+      border: 0;
+
+      background: var(--soft);
+
+      color: var(--text);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      cursor: pointer;
+
+      margin-top: 8px;
+
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (min-width: 700px) {
+
+      body {
+
+        max-width: 700px;
+
+        margin: 0 auto;
+
+      }
+
+
+      .bottom-nav {
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 700px;
+
+      }
+
+
+      .booking-fixed {
+
+        max-width: 668px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: calc(100% - 32px);
+
+      }
+
+    }
+
+  </style>
 
 </head>
 
 
 <body>
 
-<div class="container">
 
-  <div class="brand">
+<div id="app">
 
-    <div class="brand-title">
+
+  <!-- =======================================
+       HEADER
+       ======================================== -->
+
+  <header class="top-header">
+
+    <div class="brand">
       HAIR PASSPORT
     </div>
 
-    <div class="brand-subtitle">
-      DIGITAL HAIR EXPERIENCE
-    </div>
-
-  </div>
-
-
-  <div class="tabs">
-
-    <button
-      class="tab active"
-      data-tab="home"
+    <h1
+      id="pageTitle"
+      class="page-title"
     >
       Главная
-    </button>
+    </h1>
 
-    <button
-      class="tab"
-      data-tab="passport"
-    >
-      Hair Passport
-    </button>
-
-    <button
-      class="tab"
-      data-tab="master"
-      id="masterTab"
-    >
-      Карта мастера
-    </button>
-
-  </div>
+  </header>
 
 
-  <!-- ======================================
+  <!-- =======================================
        HOME
-  ======================================= -->
+       ======================================== -->
 
-  <section
-    id="home"
-    class="tab-page"
+  <main
+    id="homePage"
+    class="page active"
   >
 
-    <div class="hero">
+    <section class="hero">
 
-      <h1>
+      <h2 class="hero-title">
         Your hair,<br>
-        documented.
-      </h1>
+        your passport.
+      </h2>
 
-      <p>
-        Персональный опыт ухода за волосами —
-        от первой записи до истории процедур
-        и рекомендаций мастера.
+      <p class="hero-text">
+        Персональный подход к волосам,
+        история процедур и запись
+        к мастеру в одном месте.
       </p>
 
-    </div>
+    </section>
 
 
-    <div class="section-title">
-      Услуги
-    </div>
+    <section class="section">
 
+      <div class="section-header">
 
-    <div
-      id="services"
-    >
+        <h2 class="section-title">
+          Услуги
+        </h2>
 
-      <div class="loading">
-        Загружаем услуги…
+        <span
+          id="servicesCount"
+          class="section-caption"
+        >
+          Загрузка...
+        </span>
+
       </div>
 
+
+      <div
+        id="servicesList"
+        class="services-list"
+      >
+
+        <div class="loading">
+          Загружаем услуги...
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          О мастере
+        </h2>
+
+      </div>
+
+
+      <div class="info-card">
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Формат
+          </span>
+
+          <span class="info-value">
+            Персональная работа
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Запись
+          </span>
+
+          <span class="info-value">
+            По предварительной записи
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Hair Passport
+          </span>
+
+          <span class="info-value">
+            Персональная история волос
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <div class="booking-fixed">
+
+      <button
+        class="booking-button"
+        onclick="openBooking()"
+      >
+        Записаться
+      </button>
+
     </div>
 
-  </section>
+  </main>
 
 
-  <!-- ======================================
-       PASSPORT
-  ======================================= -->
+  <!-- =======================================
+       HAIR PASSPORT
+       ======================================== -->
 
-  <section
-    id="passport"
-    class="tab-page hidden"
+  <main
+    id="passportPage"
+    class="page"
   >
 
-    <div class="passport">
+    <section class="passport-header">
 
-      <img
+      <div
         id="passportAvatar"
-        class="avatar hidden"
-        alt=""
+        class="avatar"
       >
+        ✦
+      </div>
+
 
       <div
         id="passportName"
@@ -959,120 +1251,386 @@ button {
       </div>
 
 
-      <div class="info-row">
+      <div
+        id="passportCaption"
+        class="passport-caption"
+      >
+        Персональная карта волос
+      </div>
 
-        <div class="info-label">
-          Тип волос
-        </div>
+    </section>
 
-        <div class="info-value">
-          Будет заполнено
-        </div>
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          Мои волосы
+        </h2>
 
       </div>
 
 
-      <div class="info-row">
+      <div class="passport-grid">
 
-        <div class="info-label">
-          Цвет волос
+
+        <div class="passport-item">
+
+          <div class="passport-item-label">
+            Тип волос
+          </div>
+
+          <div
+            id="hairType"
+            class="passport-item-value"
+          >
+            Пока не заполнено
+          </div>
+
         </div>
 
-        <div class="info-value">
-          Будет заполнено
+
+        <div class="passport-item">
+
+          <div class="passport-item-label">
+            Форма лица
+          </div>
+
+          <div
+            id="faceType"
+            class="passport-item-value"
+          >
+            Пока не заполнено
+          </div>
+
+        </div>
+
+
+        <div class="passport-item">
+
+          <div class="passport-item-label">
+            Цвет волос
+          </div>
+
+          <div
+            id="hairColor"
+            class="passport-item-value"
+          >
+            Пока не заполнено
+          </div>
+
+        </div>
+
+
+        <div class="passport-item">
+
+          <div class="passport-item-label">
+            Следующий визит
+          </div>
+
+          <div
+            id="nextVisit"
+            class="passport-item-value"
+          >
+            Будет рассчитан
+          </div>
+
         </div>
 
       </div>
 
+    </section>
 
-      <div class="info-row">
 
-        <div class="info-label">
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
           Рекомендации
-        </div>
+        </h2>
 
-        <div class="info-value">
-          Персональные рекомендации мастера
+      </div>
+
+
+      <div class="info-card">
+
+        <div
+          id="careRecommendation"
+          style="
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+          "
+        >
+          Персональные рекомендации
+          появятся после заполнения
+          Hair Passport.
         </div>
 
       </div>
 
-    </div>
-
-  </section>
+    </section>
 
 
-  <!-- ======================================
-       MASTER
-  ======================================= -->
+    <section class="section">
 
-  <section
-    id="master"
-    class="tab-page hidden"
+      <div class="section-header">
+
+        <h2 class="section-title">
+          История
+        </h2>
+
+      </div>
+
+
+      <div class="master-empty">
+
+        Здесь будет история твоих процедур,
+        использованных техник, продуктов
+        и фотографий результата.
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================
+       MASTER CARD
+       ======================================== -->
+
+  <main
+    id="masterPage"
+    class="page"
   >
 
-    <div class="master-card">
+    <section class="hero">
 
-      <h2>
+      <h2 class="hero-title">
         Карта мастера
       </h2>
 
-      <p>
-        Раздел доступен только мастеру.
+      <p class="hero-text">
+        Рабочее пространство мастера:
+        клиенты, история процедур,
+        записи и персональные данные.
       </p>
 
-    </div>
+    </section>
 
-  </section>
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          Клиенты
+        </h2>
+
+      </div>
+
+
+      <div
+        id="masterClients"
+        class="master-list"
+      >
+
+        <div class="master-empty">
+
+          Раздел будет подключён
+          к листу «Клиенты».
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
 
 </div>
 
 
-<!-- ======================================
-     FIXED BOOK BUTTON
-======================================= -->
+<!-- =========================================
+     BOTTOM NAV
+     ========================================== -->
 
-<div class="book-fixed">
+<nav class="bottom-nav">
 
-  <button
-    id="bookButton"
-  >
-    Записаться
-  </button>
-
-</div>
+  <div class="nav-inner">
 
 
-<!-- ======================================
+    <button
+      class="nav-button active"
+      data-page="home"
+      onclick="showPage('home')"
+    >
+
+      <span class="nav-icon">
+        ⌂
+      </span>
+
+      Главная
+
+    </button>
+
+
+    <button
+      class="nav-button"
+      data-page="passport"
+      onclick="showPage('passport')"
+    >
+
+      <span class="nav-icon">
+        ◇
+      </span>
+
+      Hair Passport
+
+    </button>
+
+
+    <button
+      id="masterNav"
+      class="nav-button"
+      data-page="master"
+      onclick="showPage('master')"
+    >
+
+      <span class="nav-icon">
+        ◎
+      </span>
+
+      Карта мастера
+
+    </button>
+
+
+  </div>
+
+</nav>
+
+
+<!-- =========================================
      SERVICE MODAL
-======================================= -->
+     ========================================== -->
 
 <div
   id="serviceModal"
   class="modal"
+  onclick="closeModalFromBackground(event)"
 >
 
   <div class="modal-content">
 
+    <div class="modal-handle"></div>
+
+
     <div
       id="modalTitle"
       class="modal-title"
-    ></div>
-
-    <div
-      id="modalSubtitle"
-      class="modal-subtitle"
-    ></div>
+    >
+      Услуга
+    </div>
 
 
     <div
       id="modalDescription"
-    ></div>
+      class="modal-description"
+    >
+      Описание услуги
+    </div>
+
+
+    <div
+      id="modalDetails"
+      class="modal-details"
+    >
+
+      <div class="modal-detail-row">
+
+        <span class="modal-detail-label">
+          Длина
+        </span>
+
+        <span
+          id="modalLength"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div class="modal-detail-row">
+
+        <span class="modal-detail-label">
+          Стоимость
+        </span>
+
+        <span
+          id="modalPrice"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div class="modal-detail-row">
+
+        <span class="modal-detail-label">
+          Длительность
+        </span>
+
+        <span
+          id="modalDuration"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div
+        id="modalWearRow"
+        class="modal-detail-row"
+      >
+
+        <span class="modal-detail-label">
+          Срок носки
+        </span>
+
+        <span
+          id="modalWear"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
+
+    </div>
 
 
     <button
-      class="close-button"
-      onclick="closeServiceModal()"
+      class="booking-button"
+      onclick="startBookingFromModal()"
+    >
+      Записаться на эту услугу
+    </button>
+
+
+    <button
+      class="modal-close"
+      onclick="closeModal()"
     >
       Закрыть
     </button>
@@ -1082,261 +1640,50 @@ button {
 </div>
 
 
-<!-- ======================================
-     BOOKING MODAL
-======================================= -->
-
-<div
-  id="bookingModal"
-  class="modal"
->
-
-  <div class="modal-content">
-
-    <!-- STEP 1 -->
-
-    <div
-      id="bookingStep1"
-      class="booking-step active"
-    >
-
-      <button
-        class="back-button"
-        onclick="closeBooking()"
-      >
-        ← Назад
-      </button>
-
-
-      <div class="booking-title">
-        Выберите услугу
-      </div>
-
-      <div class="booking-description">
-        Сначала выберите процедуру.
-      </div>
-
-
-      <div
-        id="bookingServices"
-      >
-
-        <div class="loading">
-          Загружаем…
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- STEP 2 -->
-
-    <div
-      id="bookingStep2"
-      class="booking-step"
-    >
-
-      <button
-        class="back-button"
-        onclick="showBookingStep(1)"
-      >
-        ← Назад
-      </button>
-
-
-      <div
-        id="bookingLengthTitle"
-        class="booking-title"
-      >
-        Длина волос
-      </div>
-
-      <div class="booking-description">
-        Выберите вариант, соответствующий
-        вашей длине волос.
-      </div>
-
-
-      <div
-        id="bookingLengths"
-      ></div>
-
-    </div>
-
-
-    <!-- STEP 3 -->
-
-    <div
-      id="bookingStep3"
-      class="booking-step"
-    >
-
-      <button
-        class="back-button"
-        onclick="showBookingStep(2)"
-      >
-        ← Назад
-      </button>
-
-
-      <div class="booking-title">
-        Выберите дату
-      </div>
-
-      <div class="booking-description">
-        Понедельник — выходной.
-      </div>
-
-
-      <input
-        id="bookingDate"
-        class="date-input"
-        type="date"
-      >
-
-    </div>
-
-
-    <!-- STEP 4 -->
-
-    <div
-      id="bookingStep4"
-      class="booking-step"
-    >
-
-      <button
-        class="back-button"
-        onclick="showBookingStep(3)"
-      >
-        ← Назад
-      </button>
-
-
-      <div class="booking-title">
-        Свободное время
-      </div>
-
-      <div
-        id="bookingTimeDescription"
-        class="booking-description"
-      ></div>
-
-
-      <div
-        id="timeSlots"
-        class="time-grid"
-      ></div>
-
-    </div>
-
-
-    <!-- STEP 5 -->
-
-    <div
-      id="bookingStep5"
-      class="booking-step"
-    >
-
-      <button
-        class="back-button"
-        onclick="showBookingStep(4)"
-      >
-        ← Назад
-      </button>
-
-
-      <div class="booking-title">
-        Подтверждение
-      </div>
-
-      <div class="booking-description">
-        Проверьте данные записи.
-      </div>
-
-
-      <div
-        id="bookingSummary"
-        class="summary"
-      ></div>
-
-
-      <button
-        id="confirmBookingButton"
-        class="confirm-button"
-      >
-        Подтвердить запись
-      </button>
-
-    </div>
-
-
-    <!-- SUCCESS -->
-
-    <div
-      id="bookingSuccess"
-      class="booking-step"
-    >
-
-      <div class="success">
-
-        <div class="success-icon">
-          ✓
-        </div>
-
-        <h2>
-          Запись создана
-        </h2>
-
-        <p>
-          Ваша запись отправлена мастеру
-          на подтверждение.
-        </p>
-
-
-        <div
-          id="successBookingId"
-          style="
-            margin-top:15px;
-            font-size:12px;
-            color:#999;
-          "
-        ></div>
-
-
-        <button
-          class="confirm-button"
-          onclick="closeBooking()"
-        >
-          Готово
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
 <script>
 
-/* =========================================
-   CONFIG
-========================================= */
+/*************************************************
+ * CONFIG
+ *************************************************/
+
+/*
+ * ВАЖНО:
+ *
+ * СЮДА ВСТАВЬ ТВОЙ РАБОЧИЙ URL APPS SCRIPT.
+ *
+ * Нужен URL ДО /exec.
+ *
+ * ПРАВИЛЬНО:
+ *
+ * https://script.google.com/macros/s/XXXXXXXX/exec
+ *
+ * НЕ нужно:
+ *
+ * https://script.googleusercontent.com/...
+ *
+ */
 
 const API_URL =
   'https://script.google.com/macros/s/AKfycbyx_dyC150F-jebHBEfSMAMddrkCRiPFtMTxb5S0wIOyIsdMhQSfvpKCStX7JXhMxSK/exec';
 
 
-const MASTER_TELEGRAM_ID =
-  '';
+/*
+ * Telegram User ID мастера.
+ *
+ * Пока оставляем пустым.
+ *
+ * Когда будем подключать
+ * реальную роль мастера,
+ * сюда поставим Telegram User ID
+ * мастера.
+ */
+
+const MASTER_TELEGRAM_ID = '';
 
 
-/* =========================================
-   TELEGRAM
-========================================= */
+/*************************************************
+ * TELEGRAM
+ *************************************************/
 
 const tg =
   window.Telegram &&
@@ -1354,9 +1701,9 @@ if (tg) {
 }
 
 
-/* =========================================
-   STATE
-========================================= */
+/*************************************************
+ * STATE
+ *************************************************/
 
 let services = [];
 
@@ -1364,137 +1711,801 @@ let selectedService = null;
 
 let selectedLength = null;
 
-let selectedDate = null;
 
-let selectedTime = null;
+/*************************************************
+ * PAGE TITLES
+ *************************************************/
 
+const pageTitles = {
 
-/* =========================================
-   ELEMENTS
-========================================= */
+  home: 'Главная',
 
-const servicesContainer =
-  document.getElementById(
-    'services'
-  );
+  passport: 'Hair Passport',
 
+  master: 'Карта мастера'
 
-const bookingServicesContainer =
-  document.getElementById(
-    'bookingServices'
-  );
+};
 
 
-const bookingModal =
-  document.getElementById(
-    'bookingModal'
-  );
+/*************************************************
+ * SHOW PAGE
+ *************************************************/
+
+function showPage(page) {
+
+  const pages = {
+
+    home:
+      document.getElementById('homePage'),
+
+    passport:
+      document.getElementById('passportPage'),
+
+    master:
+      document.getElementById('masterPage')
+
+  };
 
 
-/* =========================================
-   INITIALIZATION
-========================================= */
+  Object.keys(pages).forEach(function(key) {
 
-document.addEventListener(
-  'DOMContentLoaded',
-  async function() {
+    pages[key]
+      .classList
+      .remove('active');
 
-    setupTabs();
+  });
 
-    setupTelegramUser();
 
-    await loadServices();
+  if (pages[page]) {
 
-    setupBookingDate();
+    pages[page]
+      .classList
+      .add('active');
 
   }
-);
 
 
-/* =========================================
-   TABS
-========================================= */
+  document
+    .getElementById('pageTitle')
+    .textContent =
+      pageTitles[page] || 'Hair Passport';
 
-function setupTabs() {
 
-  const tabs =
-    document.querySelectorAll(
-      '.tab'
+  document
+    .querySelectorAll('.nav-button')
+    .forEach(function(button) {
+
+      button.classList.remove('active');
+
+    });
+
+
+  const activeButton =
+    document.querySelector(
+      '.nav-button[data-page="' +
+      page +
+      '"]'
     );
 
 
-  tabs.forEach(
-    function(tab) {
+  if (activeButton) {
 
-      tab.addEventListener(
+    activeButton.classList.add('active');
+
+  }
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: 'smooth'
+
+  });
+
+}
+
+
+/*************************************************
+ * LOAD SERVICES
+ *************************************************/
+
+async function loadServices() {
+
+  const container =
+    document.getElementById(
+      'servicesList'
+    );
+
+
+  try {
+
+    if (
+      !API_URL ||
+      API_URL.includes('ВСТАВЬ_СЮДА')
+    ) {
+
+      throw new Error(
+        'Не указан API_URL в index.html'
+      );
+
+    }
+
+
+    const response =
+      await fetch(
+        API_URL +
+        '?action=services',
+        {
+          method: 'GET'
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        'API HTTP error: ' +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !data.success
+    ) {
+
+      throw new Error(
+        data.error ||
+        'API вернул ошибку'
+      );
+
+    }
+
+
+    services =
+      Array.isArray(data.services)
+        ? data.services
+        : [];
+
+
+    renderServices();
+
+
+  } catch (error) {
+
+    console.error(
+      'Services error:',
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="error">
+
+        Не удалось загрузить услуги.
+
+        <br><br>
+
+        Проверь подключение
+        к Google Apps Script.
+
+        <br><br>
+
+        <small>
+          ${escapeHtml(
+            error.message
+          )}
+        </small>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById(
+        'servicesCount'
+      )
+      .textContent =
+        'Ошибка';
+
+  }
+
+}
+
+
+/*************************************************
+ * GROUP SERVICES
+ *************************************************/
+
+function groupServices(items) {
+
+  const groups = {};
+
+
+  items.forEach(function(item) {
+
+    const name =
+      item.service || 'Услуга';
+
+
+    if (!groups[name]) {
+
+      groups[name] = [];
+
+    }
+
+
+    groups[name].push(item);
+
+  });
+
+
+  return groups;
+
+}
+
+
+/*************************************************
+ * RENDER SERVICES
+ *************************************************/
+
+function renderServices() {
+
+  const container =
+    document.getElementById(
+      'servicesList'
+    );
+
+
+  const groups =
+    groupServices(services);
+
+
+  const names =
+    Object.keys(groups);
+
+
+  document
+    .getElementById(
+      'servicesCount'
+    )
+    .textContent =
+      names.length +
+      ' ' +
+      pluralize(
+        names.length,
+        'услуга',
+        'услуги',
+        'услуг'
+      );
+
+
+  if (!names.length) {
+
+    container.innerHTML = `
+
+      <div class="loading">
+        Активных услуг пока нет.
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = '';
+
+
+  names.forEach(function(name) {
+
+    const items =
+      groups[name];
+
+
+    const card =
+      document.createElement('div');
+
+
+    card.className =
+      'service-card';
+
+
+    const first =
+      items[0];
+
+
+    const main =
+      document.createElement('button');
+
+
+    main.className =
+      'service-main';
+
+
+    main.type =
+      'button';
+
+
+    main.innerHTML = `
+
+      <div>
+
+        <div class="service-name">
+          ${escapeHtml(name)}
+        </div>
+
+        <div class="service-subtitle">
+          ${items.length}
+          ${pluralize(
+            items.length,
+            'вариант',
+            'варианта',
+            'вариантов'
+          )}
+          по длине волос
+        </div>
+
+      </div>
+
+
+      <div class="service-arrow">
+        ↓
+      </div>
+
+    `;
+
+
+    main.addEventListener(
+      'click',
+      function() {
+
+        card.classList.toggle(
+          'open'
+        );
+
+      }
+    );
+
+
+    const options =
+      document.createElement('div');
+
+
+    options.className =
+      'service-options';
+
+
+    items.forEach(function(item) {
+
+      const option =
+        document.createElement('button');
+
+
+      option.type =
+        'button';
+
+
+      option.className =
+        'length-option';
+
+
+      option.innerHTML = `
+
+        <div class="length-left">
+
+          <div class="length-name">
+            ${formatLength(
+              item.length
+            )}
+          </div>
+
+          ${
+            item.description
+              ? `
+                <div class="length-description">
+                  ${escapeHtml(
+                    item.description
+                  )}
+                </div>
+              `
+              : ''
+          }
+
+        </div>
+
+
+        <div class="length-right">
+
+          <div class="length-price">
+            ${formatPrice(
+              item.price
+            )}
+          </div>
+
+          <div class="length-duration">
+            ${formatDuration(
+              item.duration
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      option.addEventListener(
         'click',
         function() {
 
-          const target =
-            tab.dataset.tab;
-
-
-          tabs.forEach(
-            function(item) {
-
-              item.classList.remove(
-                'active'
-              );
-
-            }
-          );
-
-
-          tab.classList.add(
-            'active'
-          );
-
-
-          document
-            .querySelectorAll(
-              '.tab-page'
-            )
-            .forEach(
-              function(page) {
-
-                page.classList.add(
-                  'hidden'
-                );
-
-              }
-            );
-
-
-          const page =
-            document.getElementById(
-              target
-            );
-
-
-          if (page) {
-
-            page.classList.remove(
-              'hidden'
-            );
-
-          }
+          openServiceModal(item);
 
         }
       );
 
-    }
+
+      options.appendChild(option);
+
+    });
+
+
+    card.appendChild(main);
+
+    card.appendChild(options);
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/*************************************************
+ * OPEN SERVICE MODAL
+ *************************************************/
+
+function openServiceModal(item) {
+
+  selectedService =
+    item;
+
+
+  selectedLength =
+    item.length;
+
+
+  document
+    .getElementById(
+      'modalTitle'
+    )
+    .textContent =
+      item.service;
+
+
+  document
+    .getElementById(
+      'modalDescription'
+    )
+    .textContent =
+      item.description ||
+      'Персональная услуга для твоих волос.';
+
+
+  document
+    .getElementById(
+      'modalLength'
+    )
+    .textContent =
+      formatLength(
+        item.length
+      );
+
+
+  document
+    .getElementById(
+      'modalPrice'
+    )
+    .textContent =
+      formatPrice(
+        item.price
+      );
+
+
+  document
+    .getElementById(
+      'modalDuration'
+    )
+    .textContent =
+      formatDuration(
+        item.duration
+      );
+
+
+  const wearRow =
+    document.getElementById(
+      'modalWearRow'
+    );
+
+
+  if (
+    item.wearPeriod
+  ) {
+
+    wearRow.style.display =
+      'flex';
+
+
+    document
+      .getElementById(
+        'modalWear'
+      )
+      .textContent =
+        item.wearPeriod;
+
+  } else {
+
+    wearRow.style.display =
+      'none';
+
+  }
+
+
+  document
+    .getElementById(
+      'serviceModal'
+    )
+    .classList
+    .add('open');
+
+}
+
+
+/*************************************************
+ * CLOSE MODAL
+ *************************************************/
+
+function closeModal() {
+
+  document
+    .getElementById(
+      'serviceModal'
+    )
+    .classList
+    .remove('open');
+
+}
+
+
+/*************************************************
+ * CLOSE MODAL ON BACKGROUND
+ *************************************************/
+
+function closeModalFromBackground(
+  event
+) {
+
+  if (
+    event.target.id ===
+    'serviceModal'
+  ) {
+
+    closeModal();
+
+  }
+
+}
+
+
+/*************************************************
+ * BOOKING
+ *************************************************/
+
+function openBooking() {
+
+  /*
+   * На этом этапе просто открываем
+   * первую страницу и прокручиваем
+   * к услугам.
+   *
+   * В следующем этапе здесь появится
+   * настоящий booking flow.
+   */
+
+  showPage('home');
+
+
+  const section =
+    document.querySelector(
+      '#homePage .section'
+    );
+
+
+  if (section) {
+
+    section.scrollIntoView({
+      behavior: 'smooth'
+    });
+
+  }
+
+}
+
+
+/*************************************************
+ * BOOKING FROM SERVICE
+ *************************************************/
+
+function startBookingFromModal() {
+
+  if (!selectedService) {
+
+    return;
+
+  }
+
+
+  /*
+   * Пока не отправляем запись
+   * в Google Sheets.
+   *
+   * Следующим этапом здесь будет:
+   *
+   * услуга
+   * ↓
+   * дата
+   * ↓
+   * доступные блоки
+   * ↓
+   * подтверждение
+   * ↓
+   * Записи и Продажи
+   */
+
+
+  if (tg) {
+
+    try {
+
+      tg.HapticFeedback
+        .impactOccurred('light');
+
+    } catch (e) {}
+
+  }
+
+
+  closeModal();
+
+
+  showBookingComingSoon(
+    selectedService
   );
 
 }
 
 
-/* =========================================
-   TELEGRAM USER
-========================================= */
+/*************************************************
+ * BOOKING COMING SOON
+ *************************************************/
+
+function showBookingComingSoon(
+  item
+) {
+
+  const message =
+
+    item.service +
+    ' — ' +
+    formatLength(item.length) +
+    '\n\n' +
+
+    formatPrice(item.price) +
+    ' · ' +
+    formatDuration(item.duration) +
+    '\n\n' +
+
+    'Сейчас мы подключаем выбор даты и времени.';
+
+
+  if (tg) {
+
+    try {
+
+      tg.showAlert(
+        message
+      );
+
+      return;
+
+    } catch (e) {}
+
+  }
+
+
+  alert(message);
+
+}
+
+
+/*************************************************
+ * MASTER ACCESS
+ *************************************************/
+
+function setupMasterAccess() {
+
+  const masterButton =
+    document.getElementById(
+      'masterNav'
+    );
+
+
+  /*
+   * Если Telegram недоступен
+   * или ID мастера ещё не задан —
+   * скрываем вкладку.
+   */
+
+  if (
+    !tg ||
+    !tg.initDataUnsafe ||
+    !tg.initDataUnsafe.user
+  ) {
+
+    masterButton.style.display =
+      'none';
+
+    return;
+
+  }
+
+
+  const telegramUserId =
+    String(
+      tg.initDataUnsafe.user.id
+    );
+
+
+  if (
+    !MASTER_TELEGRAM_ID ||
+    String(
+      MASTER_TELEGRAM_ID
+    ) !== telegramUserId
+  ) {
+
+    masterButton.style.display =
+      'none';
+
+    return;
+
+  }
+
+
+  masterButton.style.display =
+    'block';
+
+}
+
+
+/*************************************************
+ * TELEGRAM USER
+ *************************************************/
 
 function setupTelegramUser() {
 
-  if (!tg) {
+  if (
+    !tg ||
+    !tg.initDataUnsafe ||
+    !tg.initDataUnsafe.user
+  ) {
 
     return;
 
@@ -1502,44 +2513,37 @@ function setupTelegramUser() {
 
 
   const user =
-    tg.initDataUnsafe &&
     tg.initDataUnsafe.user;
 
 
-  if (!user) {
-
-    return;
-
-  }
-
-
-  const firstName =
-    user.first_name || '';
+  const name =
+    [
+      user.first_name,
+      user.last_name
+    ]
+      .filter(Boolean)
+      .join(' ');
 
 
-  const lastName =
-    user.last_name || '';
+  if (name) {
 
-
-  const fullName =
-    (
-      firstName +
-      ' ' +
-      lastName
-    ).trim();
-
-
-  if (fullName) {
-
-    document.getElementById(
-      'passportName'
-    ).textContent =
-      fullName;
+    document
+      .getElementById(
+        'passportName'
+      )
+      .textContent =
+        name;
 
   }
 
 
-  if (user.photo_url) {
+  /*
+   * Telegram profile photo
+   */
+
+  if (
+    user.photo_url
+  ) {
 
     const avatar =
       document.getElementById(
@@ -1547,1147 +2551,43 @@ function setupTelegramUser() {
       );
 
 
-    avatar.src =
-      user.photo_url;
+    avatar.innerHTML = `
 
+      <img
+        src="${escapeAttribute(
+          user.photo_url
+        )}"
+        alt=""
+      >
 
-    avatar.classList.remove(
-      'hidden'
-    );
+    `;
 
   }
 
 
   /*
-   * Master tab
+   * Пока показываем Telegram
+   * имя как базовую информацию.
+   *
+   * Позже заменим это
+   * данными из листа "Клиенты".
    */
-  if (
-    MASTER_TELEGRAM_ID &&
-    String(user.id) ===
-    String(MASTER_TELEGRAM_ID)
-  ) {
-
-    document
-      .getElementById(
-        'masterTab'
-      )
-      .classList.remove(
-        'hidden'
-      );
-
-  } else {
-
-    document
-      .getElementById(
-        'masterTab'
-      )
-      .classList.add(
-        'hidden'
-      );
-
-  }
-
-}
-
-
-/* =========================================
-   LOAD SERVICES
-========================================= */
-
-async function loadServices() {
-
-  try {
-
-    const response =
-      await fetch(
-        API_URL +
-        '?action=services'
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.success
-    ) {
-
-      throw new Error(
-        data.error ||
-        'Не удалось загрузить услуги'
-      );
-
-    }
-
-
-    services =
-      data.services || [];
-
-
-    renderServices();
-
-    renderBookingServices();
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    servicesContainer.innerHTML =
-      '<div class="empty">' +
-      'Не удалось загрузить услуги.' +
-      '</div>';
-
-  }
-
-}
-
-
-/* =========================================
-   MAIN SERVICES
-========================================= */
-
-function renderServices() {
-
-  const groups =
-    {};
-
-
-  services.forEach(
-    function(item) {
-
-      if (
-        !groups[item.service]
-      ) {
-
-        groups[item.service] = [];
-
-      }
-
-
-      groups[item.service]
-        .push(item);
-
-    }
-  );
-
-
-  servicesContainer.innerHTML =
-    '';
-
-
-  Object.keys(groups)
-    .forEach(
-      function(serviceName) {
-
-        const card =
-          document.createElement(
-            'div'
-          );
-
-
-        card.className =
-          'service-card';
-
-
-        const main =
-          document.createElement(
-            'button'
-          );
-
-
-        main.className =
-          'service-main';
-
-
-        main.innerHTML =
-          '<span class="service-name">' +
-          escapeHtml(
-            serviceName
-          ) +
-          '</span>' +
-          '<span class="service-arrow">⌄</span>';
-
-
-        const lengths =
-          document.createElement(
-            'div'
-          );
-
-
-        lengths.className =
-          'lengths';
-
-
-        groups[serviceName]
-          .forEach(
-            function(item) {
-
-              const button =
-                document.createElement(
-                  'button'
-                );
-
-
-              button.className =
-                'length-button';
-
-
-              button.innerHTML =
-
-                '<span class="length-name">' +
-                escapeHtml(
-                  getLengthLabel(
-                    item.length
-                  )
-                ) +
-                '</span>' +
-
-                '<span class="length-price">' +
-                formatPrice(
-                  item.price
-                ) +
-                '</span>';
-
-
-              button.addEventListener(
-                'click',
-                function() {
-
-                  openServiceModal(
-                    item
-                  );
-
-                }
-              );
-
-
-              lengths.appendChild(
-                button
-              );
-
-            }
-          );
-
-
-        main.addEventListener(
-          'click',
-          function() {
-
-            card.classList.toggle(
-              'open'
-            );
-
-          }
-        );
-
-
-        card.appendChild(
-          main
-        );
-
-
-        card.appendChild(
-          lengths
-        );
-
-
-        servicesContainer.appendChild(
-          card
-        );
-
-      }
-    );
-
-}
-
-
-/* =========================================
-   SERVICE MODAL
-========================================= */
-
-function openServiceModal(
-  service
-) {
-
-  document.getElementById(
-    'modalTitle'
-  ).textContent =
-    service.service;
-
-
-  document.getElementById(
-    'modalSubtitle'
-  ).textContent =
-    getLengthLabel(
-      service.length
-    ) +
-    ' · ' +
-    formatPrice(
-      service.price
-    ) +
-    ' · ' +
-    service.duration +
-    ' мин';
-
-
-  document.getElementById(
-    'modalDescription'
-  ).innerHTML =
-    service.description
-      ? '<p>' +
-        escapeHtml(
-          service.description
-        ) +
-        '</p>'
-      : '';
-
-
-  document.getElementById(
-    'serviceModal'
-  ).classList.add(
-    'open'
-  );
-
-}
-
-
-function closeServiceModal() {
-
-  document.getElementById(
-    'serviceModal'
-  ).classList.remove(
-    'open'
-  );
-
-}
-
-
-/* =========================================
-   BOOKING
-========================================= */
-
-document.getElementById(
-  'bookButton'
-).addEventListener(
-  'click',
-  openBooking
-);
-
-
-function openBooking() {
-
-  selectedService = null;
-
-  selectedLength = null;
-
-  selectedDate = null;
-
-  selectedTime = null;
-
-
-  renderBookingServices();
-
-
-  showBookingStep(1);
-
-
-  bookingModal.classList.add(
-    'open'
-  );
-
-}
-
-
-function closeBooking() {
-
-  bookingModal.classList.remove(
-    'open'
-  );
-
-}
-
-
-function showBookingStep(
-  number
-) {
 
   document
-    .querySelectorAll(
-      '.booking-step'
+    .getElementById(
+      'passportCaption'
     )
-    .forEach(
-      function(step) {
-
-        step.classList.remove(
-          'active'
-        );
-
-      }
-    );
-
-
-  const step =
-    document.getElementById(
-      'bookingStep' + number
-    );
-
-
-  if (step) {
-
-    step.classList.add(
-      'active'
-    );
-
-  }
+    .textContent =
+      'Telegram-профиль';
 
 }
 
 
-/* =========================================
-   BOOKING SERVICES
-========================================= */
-
-function renderBookingServices() {
-
-  bookingServicesContainer.innerHTML =
-    '';
-
-
-  const groups =
-    {};
-
-
-  services.forEach(
-    function(item) {
-
-      if (
-        !groups[item.service]
-      ) {
-
-        groups[item.service] = [];
-
-      }
-
-
-      groups[item.service]
-        .push(item);
-
-    }
-  );
-
-
-  Object.keys(groups)
-    .forEach(
-      function(serviceName) {
-
-        const button =
-          document.createElement(
-            'button'
-          );
-
-
-        button.className =
-          'option';
-
-
-        button.innerHTML =
-
-          '<div class="option-title">' +
-          escapeHtml(
-            serviceName
-          ) +
-          '</div>' +
-
-          '<div class="option-meta">' +
-          groups[serviceName].length +
-          ' варианта длины' +
-          '</div>';
-
-
-        button.addEventListener(
-          'click',
-          function() {
-
-            selectedService =
-              serviceName;
-
-
-            renderBookingLengths();
-
-
-            showBookingStep(2);
-
-          }
-        );
-
-
-        bookingServicesContainer
-          .appendChild(
-            button
-          );
-
-      }
-    );
-
-}
-
-
-/* =========================================
-   BOOKING LENGTHS
-========================================= */
-
-function renderBookingLengths() {
-
-  const container =
-    document.getElementById(
-      'bookingLengths'
-    );
-
-
-  container.innerHTML =
-    '';
-
-
-  const matching =
-    services.filter(
-      function(item) {
-
-        return (
-          item.service ===
-          selectedService
-        );
-
-      }
-    );
-
-
-  document.getElementById(
-    'bookingLengthTitle'
-  ).textContent =
-    selectedService;
-
-
-  matching.forEach(
-    function(item) {
-
-      const button =
-        document.createElement(
-          'button'
-        );
-
-
-      button.className =
-        'option';
-
-
-      button.innerHTML =
-
-        '<div class="option-title">' +
-        escapeHtml(
-          getLengthLabel(
-            item.length
-          )
-        ) +
-        '</div>' +
-
-        '<div class="option-meta">' +
-        formatPrice(
-          item.price
-        ) +
-        ' · ' +
-        item.duration +
-        ' мин' +
-        '</div>';
-
-
-      button.addEventListener(
-        'click',
-        function() {
-
-          selectedLength =
-            item;
-
-
-          showBookingStep(3);
-
-        }
-      );
-
-
-      container.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   DATE
-========================================= */
-
-function setupBookingDate() {
-
-  const input =
-    document.getElementById(
-      'bookingDate'
-    );
-
-
-  const today =
-    new Date();
-
-
-  const minDate =
-    formatDateInput(
-      today
-    );
-
-
-  input.min =
-    minDate;
-
-
-  const maxDate =
-    new Date(
-      today
-    );
-
-
-  maxDate.setDate(
-    maxDate.getDate() +
-    60
-  );
-
-
-  input.max =
-    formatDateInput(
-      maxDate
-    );
-
-
-  input.addEventListener(
-    'change',
-    async function() {
-
-      if (!input.value) {
-
-        return;
-
-      }
-
-
-      const selected =
-        new Date(
-          input.value +
-          'T00:00:00'
-        );
-
-
-      /*
-       * Monday
-       */
-      if (
-        selected.getDay() === 1
-      ) {
-
-        input.value = '';
-
-        alert(
-          'Понедельник — выходной день.'
-        );
-
-        return;
-
-      }
-
-
-      selectedDate =
-        input.value;
-
-
-      await loadAvailability();
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   AVAILABILITY
-========================================= */
-
-async function loadAvailability() {
-
-  showBookingStep(4);
-
-
-  const slotsContainer =
-    document.getElementById(
-      'timeSlots'
-    );
-
-
-  const description =
-    document.getElementById(
-      'bookingTimeDescription'
-    );
-
-
-  slotsContainer.innerHTML =
-    '<div class="loading">' +
-    'Проверяем свободное время…' +
-    '</div>';
-
-
-  description.textContent =
-    formatDateForUser(
-      selectedDate
-    ) +
-    ' · ' +
-    selectedLength.duration +
-    ' мин';
-
-
-  try {
-
-    const url =
-      API_URL +
-      '?action=availability' +
-      '&date=' +
-      encodeURIComponent(
-        selectedDate
-      ) +
-      '&duration=' +
-      encodeURIComponent(
-        selectedLength.duration
-      );
-
-
-    const response =
-      await fetch(
-        url
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.success
-    ) {
-
-      throw new Error(
-        data.error ||
-        'Ошибка получения свободного времени'
-      );
-
-    }
-
-
-    renderTimeSlots(
-      data.slots || []
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    slotsContainer.innerHTML =
-      '<div class="empty">' +
-      'Не удалось загрузить свободное время.' +
-      '</div>';
-
-  }
-
-}
-
-
-/* =========================================
-   TIME SLOTS
-========================================= */
-
-function renderTimeSlots(
-  slots
-) {
-
-  const container =
-    document.getElementById(
-      'timeSlots'
-    );
-
-
-  container.innerHTML =
-    '';
-
-
-  if (
-    !slots ||
-    slots.length === 0
-  ) {
-
-    container.innerHTML =
-      '<div class="empty">' +
-      'На эту дату нет подходящего времени. Выберите другую дату.' +
-      '</div>';
-
-    return;
-
-  }
-
-
-  slots.forEach(
-    function(slot) {
-
-      const button =
-        document.createElement(
-          'button'
-        );
-
-
-      button.className =
-        'time-slot';
-
-
-      button.innerHTML =
-
-        '<strong>' +
-        escapeHtml(
-          slot.start
-        ) +
-        '</strong>' +
-
-        '<div style="' +
-        'margin-top:4px;' +
-        'font-size:11px;' +
-        'color:#999' +
-        '">' +
-
-        escapeHtml(
-          slot.end
-        ) +
-
-        '</div>';
-
-
-      button.addEventListener(
-        'click',
-        function() {
-
-          selectedTime =
-            slot.start;
-
-
-          renderBookingSummary();
-
-
-          showBookingStep(5);
-
-        }
-      );
-
-
-      container.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-/* =========================================
-   SUMMARY
-========================================= */
-
-function renderBookingSummary() {
-
-  const container =
-    document.getElementById(
-      'bookingSummary'
-    );
-
-
-  container.innerHTML =
-
-    summaryRow(
-      'Услуга',
-      selectedService
-    ) +
-
-    summaryRow(
-      'Длина',
-      getLengthLabel(
-        selectedLength.length
-      )
-    ) +
-
-    summaryRow(
-      'Дата',
-      formatDateForUser(
-        selectedDate
-      )
-    ) +
-
-    summaryRow(
-      'Время',
-      selectedTime
-    ) +
-
-    summaryRow(
-      'Длительность',
-      selectedLength.duration +
-      ' мин'
-    ) +
-
-    summaryRow(
-      'Стоимость',
-      formatPrice(
-        selectedLength.price
-      )
-    );
-
-}
-
-
-function summaryRow(
-  label,
-  value
-) {
-
-  return (
-
-    '<div class="summary-row">' +
-
-      '<div class="summary-label">' +
-        escapeHtml(label) +
-      '</div>' +
-
-      '<div class="summary-value">' +
-        escapeHtml(
-          String(value)
-        ) +
-      '</div>' +
-
-    '</div>'
-
-  );
-
-}
-
-
-/* =========================================
-   CREATE BOOKING
-========================================= */
-
-document.getElementById(
-  'confirmBookingButton'
-).addEventListener(
-  'click',
-  createBooking
-);
-
-
-async function createBooking() {
-
-  const button =
-    document.getElementById(
-      'confirmBookingButton'
-    );
-
-
-  button.disabled =
-    true;
-
-
-  button.textContent =
-    'Создаём запись…';
-
-
-  try {
-
-    const user =
-      tg &&
-      tg.initDataUnsafe &&
-      tg.initDataUnsafe.user
-        ? tg.initDataUnsafe.user
-        : null;
-
-
-    if (!user) {
-
-      throw new Error(
-        'Не удалось определить Telegram User ID.'
-      );
-
-    }
-
-
-    const payload = {
-
-      action:
-        'createBooking',
-
-      telegramUserId:
-        String(
-          user.id
-        ),
-
-      clientName:
-        (
-          user.first_name ||
-          ''
-        ) +
-        (
-          user.last_name
-            ? ' ' +
-              user.last_name
-            : ''
-        ),
-
-      service:
-        selectedService,
-
-      length:
-        selectedLength.length,
-
-      price:
-        selectedLength.price,
-
-      duration:
-        selectedLength.duration,
-
-      date:
-        selectedDate,
-
-      time:
-        selectedTime
-
-    };
-
-
-    const response =
-      await fetch(
-        API_URL,
-        {
-
-          method: 'POST',
-
-          headers: {
-
-            'Content-Type':
-              'text/plain;charset=utf-8'
-
-          },
-
-          body:
-            JSON.stringify(
-              payload
-            )
-
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !data.success
-    ) {
-
-      throw new Error(
-        data.error ||
-        'Не удалось создать запись'
-      );
-
-    }
-
-
-    document.getElementById(
-      'successBookingId'
-    ).textContent =
-      'Booking ID: ' +
-      data.bookingId;
-
-
-    showBookingStep(
-      'Success'
-    );
-
-
-    /*
-     * Исправляем отображение success,
-     * поскольку это не обычный step.
-     */
-    document
-      .querySelectorAll(
-        '.booking-step'
-      )
-      .forEach(
-        function(step) {
-
-          step.classList.remove(
-            'active'
-          );
-
-        }
-      );
-
-
-    document.getElementById(
-      'bookingSuccess'
-    ).classList.add(
-      'active'
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      error
-    );
-
-
-    alert(
-      error.message
-    );
-
-
-    button.disabled =
-      false;
-
-
-    button.textContent =
-      'Подтвердить запись';
-
-  }
-
-}
-
-
-/* =========================================
-   HELPERS
-========================================= */
-
-function getLengthLabel(
-  value
-) {
+/*************************************************
+ * FORMAT LENGTH
+ *************************************************/
+
+function formatLength(length) {
 
   const labels = {
 
@@ -2709,127 +2609,210 @@ function getLengthLabel(
   };
 
 
-  return (
-    labels[value] ||
-    value ||
-    'Без указания длины'
-  );
+  const key =
+    String(length || '')
+      .trim()
+      .toLowerCase();
+
+
+  return labels[key] ||
+    length ||
+    'Длина не указана';
 
 }
 
 
-function formatPrice(
-  value
-) {
+/*************************************************
+ * FORMAT PRICE
+ *************************************************/
+
+function formatPrice(price) {
 
   if (
-    value === null ||
-    value === undefined
+    price === null ||
+    price === undefined ||
+    price === ''
   ) {
 
-    return '';
+    return 'Цена уточняется';
 
   }
 
 
-  return (
-    Number(value)
-      .toLocaleString(
-        'en-US'
-      ) +
-    ' USD'
-  );
-
-}
-
-
-function formatDateInput(
-  date
-) {
-
-  return (
-
-    date.getFullYear() +
-    '-' +
-
-    String(
-      date.getMonth() + 1
-    ).padStart(2, '0') +
-
-    '-' +
-
-    String(
-      date.getDate()
-    ).padStart(2, '0')
-
-  );
-
-}
-
-
-function formatDateForUser(
-  dateString
-) {
-
-  if (!dateString) {
-
-    return '';
-
-  }
-
-
-  const parts =
-    dateString.split('-');
+  const number =
+    Number(price);
 
 
   if (
-    parts.length !== 3
+    isNaN(number)
   ) {
 
-    return dateString;
+    return String(price);
 
   }
 
 
-  return (
-    parts[2] +
-    '.' +
-    parts[1] +
-    '.' +
-    parts[0]
-  );
+  return '$' +
+    number.toLocaleString(
+      'en-US',
+      {
+        maximumFractionDigits: 2
+      }
+    );
 
 }
 
+
+/*************************************************
+ * FORMAT DURATION
+ *************************************************/
+
+function formatDuration(
+  duration
+) {
+
+  if (
+    duration === null ||
+    duration === undefined ||
+    duration === ''
+  ) {
+
+    return 'Время уточняется';
+
+  }
+
+
+  const minutes =
+    Number(duration);
+
+
+  if (
+    isNaN(minutes)
+  ) {
+
+    return String(duration);
+
+  }
+
+
+  const hours =
+    Math.floor(
+      minutes / 60
+    );
+
+
+  const rest =
+    minutes % 60;
+
+
+  if (
+    hours === 0
+  ) {
+
+    return minutes +
+      ' мин';
+
+  }
+
+
+  if (
+    rest === 0
+  ) {
+
+    return hours +
+      ' ч';
+
+  }
+
+
+  return hours +
+    ' ч ' +
+    rest +
+    ' мин';
+
+}
+
+
+/*************************************************
+ * PLURALIZE
+ *************************************************/
+
+function pluralize(
+  number,
+  one,
+  few,
+  many
+) {
+
+  const n =
+    Math.abs(number) % 100;
+
+
+  const n1 =
+    n % 10;
+
+
+  if (
+    n > 10 &&
+    n < 20
+  ) {
+
+    return many;
+
+  }
+
+
+  if (
+    n1 > 1 &&
+    n1 < 5
+  ) {
+
+    return few;
+
+  }
+
+
+  if (
+    n1 === 1
+  ) {
+
+    return one;
+
+  }
+
+
+  return many;
+
+}
+
+
+/*************************************************
+ * ESCAPE HTML
+ *************************************************/
 
 function escapeHtml(
   value
 ) {
 
   return String(
-    value || ''
+    value ?? ''
   )
-
     .replace(
       /&/g,
       '&amp;'
     )
-
     .replace(
       /</g,
       '&lt;'
     )
-
     .replace(
       />/g,
       '&gt;'
     )
-
     .replace(
       /"/g,
       '&quot;'
     )
-
     .replace(
       /'/g,
       '&#039;'
@@ -2837,7 +2820,41 @@ function escapeHtml(
 
 }
 
+
+/*************************************************
+ * ESCAPE ATTRIBUTE
+ *************************************************/
+
+function escapeAttribute(
+  value
+) {
+
+  return escapeHtml(
+    value
+  );
+
+}
+
+
+/*************************************************
+ * INITIALIZE APP
+ *************************************************/
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    setupTelegramUser();
+
+    setupMasterAccess();
+
+    loadServices();
+
+  }
+);
+
 </script>
+
 
 </body>
 
