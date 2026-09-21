@@ -12,7 +12,6 @@
 
   <title>Hair Passport</title>
 
-  <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 
@@ -73,7 +72,8 @@
     }
 
 
-    button {
+    button,
+    input {
 
       font: inherit;
 
@@ -484,6 +484,15 @@
     }
 
 
+    .booking-button:disabled {
+
+      opacity: 0.45;
+
+      cursor: default;
+
+    }
+
+
     .booking-fixed {
 
       position: fixed;
@@ -495,6 +504,359 @@
         calc(70px + env(safe-area-inset-bottom));
 
       z-index: 20;
+
+    }
+
+
+    /* =========================================
+       BOOKING FLOW
+       ========================================= */
+
+    .booking-flow {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 14px;
+
+    }
+
+
+    .booking-progress {
+
+      display: flex;
+
+      gap: 6px;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .booking-progress-item {
+
+      height: 4px;
+
+      flex: 1;
+
+      border-radius: 10px;
+
+      background: var(--line);
+
+    }
+
+
+    .booking-progress-item.active {
+
+      background: var(--accent);
+
+    }
+
+
+    .booking-card {
+
+      background: var(--card);
+
+      border-radius: var(--radius-md);
+
+      padding: 18px;
+
+    }
+
+
+    .booking-card-title {
+
+      font-size: 18px;
+
+      font-weight: 600;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .booking-card-caption {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.45;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .booking-summary {
+
+      background: var(--soft);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      margin-bottom: 14px;
+
+    }
+
+
+    .booking-summary-service {
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+    }
+
+
+    .booking-summary-meta {
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    .booking-date-input {
+
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #fafafa;
+
+      color: var(--text);
+
+      border-radius: 14px;
+
+      padding: 15px;
+
+      outline: none;
+
+    }
+
+
+    .booking-date-input:focus {
+
+      border-color: #bcb8b0;
+
+    }
+
+
+    .booking-slots {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 8px;
+
+      margin-top: 14px;
+
+    }
+
+
+    .booking-slot {
+
+      border: 1px solid var(--line);
+
+      background: #fafafa;
+
+      color: var(--text);
+
+      border-radius: 13px;
+
+      padding: 14px 8px;
+
+      cursor: pointer;
+
+      font-weight: 500;
+
+    }
+
+
+    .booking-slot:active {
+
+      background: var(--soft);
+
+    }
+
+
+    .booking-slot.selected {
+
+      background: var(--accent);
+
+      color: var(--white);
+
+      border-color: var(--accent);
+
+    }
+
+
+    .booking-message {
+
+      padding: 14px;
+
+      background: var(--soft);
+
+      border-radius: 14px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .booking-error {
+
+      padding: 14px;
+
+      background: #fff;
+
+      border-radius: 14px;
+
+      color: #8a2424;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+
+    }
+
+
+    .booking-actions {
+
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 14px;
+
+    }
+
+
+    .booking-secondary {
+
+      flex: 1;
+
+      border: 0;
+
+      background: var(--soft);
+
+      color: var(--text);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      cursor: pointer;
+
+    }
+
+
+    .booking-primary {
+
+      flex: 1.5;
+
+      border: 0;
+
+      background: var(--accent);
+
+      color: var(--white);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      cursor: pointer;
+
+      font-weight: 600;
+
+    }
+
+
+    .booking-primary:disabled {
+
+      opacity: 0.45;
+
+    }
+
+
+    .booking-success {
+
+      text-align: center;
+
+      padding: 12px 0 5px;
+
+    }
+
+
+    .booking-success-icon {
+
+      width: 62px;
+      height: 62px;
+
+      border-radius: 50%;
+
+      background: var(--soft);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 16px;
+
+      font-size: 25px;
+
+    }
+
+
+    .booking-success-title {
+
+      font-size: 23px;
+
+      font-weight: 600;
+
+      letter-spacing: -0.03em;
+
+    }
+
+
+    .booking-id {
+
+      margin-top: 14px;
+
+      background: var(--soft);
+
+      border-radius: 14px;
+
+      padding: 14px;
+
+      font-size: 13px;
+
+      color: var(--muted);
+
+    }
+
+
+    .booking-id strong {
+
+      display: block;
+
+      margin-top: 4px;
+
+      color: var(--text);
+
+      font-size: 16px;
 
     }
 
@@ -1452,6 +1814,313 @@
   </main>
 
 
+  <!-- =======================================
+       BOOKING PAGE
+       ======================================== -->
+
+  <main
+    id="bookingPage"
+    class="page"
+  >
+
+    <div class="booking-flow">
+
+      <div class="booking-progress">
+
+        <div
+          id="progress1"
+          class="booking-progress-item active"
+        ></div>
+
+        <div
+          id="progress2"
+          class="booking-progress-item"
+        ></div>
+
+        <div
+          id="progress3"
+          class="booking-progress-item"
+        ></div>
+
+      </div>
+
+
+      <!-- STEP 1 -->
+
+      <section
+        id="bookingStep1"
+        class="booking-card"
+      >
+
+        <div class="booking-card-title">
+          Выбранная услуга
+        </div>
+
+        <div class="booking-card-caption">
+          Проверь услугу и длину волос,
+          затем выбери дату.
+        </div>
+
+
+        <div
+          id="bookingSummary"
+          class="booking-summary"
+        >
+
+          <div
+            id="bookingSummaryService"
+            class="booking-summary-service"
+          >
+            —
+          </div>
+
+          <div
+            id="bookingSummaryMeta"
+            class="booking-summary-meta"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div class="booking-actions">
+
+          <button
+            type="button"
+            class="booking-secondary"
+            onclick="backToServices()"
+          >
+            Назад
+          </button>
+
+
+          <button
+            type="button"
+            class="booking-primary"
+            onclick="goToBookingDate()"
+          >
+            Выбрать дату
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- STEP 2 -->
+
+      <section
+        id="bookingStep2"
+        class="booking-card"
+        style="display:none;"
+      >
+
+        <div class="booking-card-title">
+          Дата и время
+        </div>
+
+        <div class="booking-card-caption">
+          Выбери дату. Мы покажем только
+          свободные интервалы для этой услуги.
+        </div>
+
+
+        <input
+          id="bookingDate"
+          class="booking-date-input"
+          type="date"
+          onchange="loadAvailability()"
+        >
+
+
+        <div
+          id="bookingAvailability"
+          style="margin-top: 14px;"
+        >
+
+          <div class="booking-message">
+            Выбери дату, чтобы увидеть
+            доступное время.
+          </div>
+
+        </div>
+
+
+        <div class="booking-actions">
+
+          <button
+            type="button"
+            class="booking-secondary"
+            onclick="showBookingStep(1)"
+          >
+            Назад
+          </button>
+
+
+          <button
+            id="continueToConfirmButton"
+            type="button"
+            class="booking-primary"
+            onclick="goToBookingConfirmation()"
+            disabled
+          >
+            Далее
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- STEP 3 -->
+
+      <section
+        id="bookingStep3"
+        class="booking-card"
+        style="display:none;"
+      >
+
+        <div class="booking-card-title">
+          Подтверждение
+        </div>
+
+        <div class="booking-card-caption">
+          Проверь детали записи перед
+          отправкой.
+        </div>
+
+
+        <div class="booking-summary">
+
+          <div
+            id="confirmService"
+            class="booking-summary-service"
+          >
+            —
+          </div>
+
+          <div
+            id="confirmLength"
+            class="booking-summary-meta"
+          >
+            —
+          </div>
+
+          <div
+            id="confirmDate"
+            class="booking-summary-meta"
+          >
+            —
+          </div>
+
+          <div
+            id="confirmTime"
+            class="booking-summary-meta"
+          >
+            —
+          </div>
+
+          <div
+            id="confirmPrice"
+            class="booking-summary-meta"
+          >
+            —
+          </div>
+
+        </div>
+
+
+        <div
+          id="bookingSubmitMessage"
+          style="display:none;"
+          class="booking-message"
+        ></div>
+
+
+        <div class="booking-actions">
+
+          <button
+            type="button"
+            class="booking-secondary"
+            onclick="showBookingStep(2)"
+          >
+            Назад
+          </button>
+
+
+          <button
+            id="confirmBookingButton"
+            type="button"
+            class="booking-primary"
+            onclick="submitBooking()"
+          >
+            Подтвердить запись
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- SUCCESS -->
+
+      <section
+        id="bookingSuccess"
+        class="booking-card"
+        style="display:none;"
+      >
+
+        <div class="booking-success">
+
+          <div class="booking-success-icon">
+            ✓
+          </div>
+
+
+          <div class="booking-success-title">
+            Запись создана
+          </div>
+
+
+          <div
+            id="successText"
+            class="booking-card-caption"
+            style="margin-top: 10px;"
+          >
+            Твоя запись успешно создана.
+          </div>
+
+
+          <div class="booking-id">
+
+            Booking ID
+
+            <strong id="successBookingId">
+              —
+            </strong>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="booking-button"
+            style="margin-top: 16px;"
+            onclick="finishBooking()"
+          >
+            Готово
+          </button>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
 </div>
 
 
@@ -1646,37 +2315,9 @@
  * CONFIG
  *************************************************/
 
-/*
- * ВАЖНО:
- *
- * СЮДА ВСТАВЬ ТВОЙ РАБОЧИЙ URL APPS SCRIPT.
- *
- * Нужен URL ДО /exec.
- *
- * ПРАВИЛЬНО:
- *
- * https://script.google.com/macros/s/XXXXXXXX/exec
- *
- * НЕ нужно:
- *
- * https://script.googleusercontent.com/...
- *
- */
-
 const API_URL =
   'https://script.google.com/macros/s/AKfycbyx_dyC150F-jebHBEfSMAMddrkCRiPFtMTxb5S0wIOyIsdMhQSfvpKCStX7JXhMxSK/exec';
 
-
-/*
- * Telegram User ID мастера.
- *
- * Пока оставляем пустым.
- *
- * Когда будем подключать
- * реальную роль мастера,
- * сюда поставим Telegram User ID
- * мастера.
- */
 
 const MASTER_TELEGRAM_ID = '';
 
@@ -1735,7 +2376,9 @@ const pageTitles = {
 
   passport: 'Hair Passport',
 
-  master: 'Карта мастера'
+  master: 'Карта мастера',
+
+  booking: 'Запись'
 
 };
 
@@ -1755,7 +2398,10 @@ function showPage(page) {
       document.getElementById('passportPage'),
 
     master:
-      document.getElementById('masterPage')
+      document.getElementById('masterPage'),
+
+    booking:
+      document.getElementById('bookingPage')
 
   };
 
@@ -1781,7 +2427,8 @@ function showPage(page) {
   document
     .getElementById('pageTitle')
     .textContent =
-      pageTitles[page] || 'Hair Passport';
+      pageTitles[page] ||
+      'Hair Passport';
 
 
   document
@@ -1834,12 +2481,11 @@ async function loadServices() {
   try {
 
     if (
-      !API_URL ||
-      API_URL.includes('ВСТАВЬ_СЮДА')
+      !API_URL
     ) {
 
       throw new Error(
-        'Не указан API_URL в index.html'
+        'Не указан API_URL'
       );
 
     }
@@ -1946,7 +2592,8 @@ function groupServices(items) {
   items.forEach(function(item) {
 
     const name =
-      item.service || 'Услуга';
+      item.service ||
+      'Услуга';
 
 
     if (!groups[name]) {
@@ -2033,10 +2680,6 @@ function renderServices() {
       'service-card';
 
 
-    const first =
-      items[0];
-
-
     const main =
       document.createElement('button');
 
@@ -2058,14 +2701,18 @@ function renderServices() {
         </div>
 
         <div class="service-subtitle">
+
           ${items.length}
+
           ${pluralize(
             items.length,
             'вариант',
             'варианта',
             'вариантов'
           )}
+
           по длине волос
+
         </div>
 
       </div>
@@ -2117,18 +2764,23 @@ function renderServices() {
         <div class="length-left">
 
           <div class="length-name">
+
             ${formatLength(
               item.length
             )}
+
           </div>
+
 
           ${
             item.description
               ? `
                 <div class="length-description">
+
                   ${escapeHtml(
                     item.description
                   )}
+
                 </div>
               `
               : ''
@@ -2140,15 +2792,20 @@ function renderServices() {
         <div class="length-right">
 
           <div class="length-price">
+
             ${formatPrice(
               item.price
             )}
+
           </div>
 
+
           <div class="length-duration">
+
             ${formatDuration(
               item.duration
             )}
+
           </div>
 
         </div>
@@ -2299,7 +2956,7 @@ function closeModal() {
 
 
 /*************************************************
- * CLOSE MODAL ON BACKGROUND
+ * CLOSE MODAL BACKGROUND
  *************************************************/
 
 function closeModalFromBackground(
@@ -2319,18 +2976,40 @@ function closeModalFromBackground(
 
 
 /*************************************************
- * BOOKING
+ * OPEN BOOKING
  *************************************************/
 
 function openBooking() {
 
+  if (!services.length) {
+
+    if (tg) {
+
+      try {
+
+        tg.showAlert(
+          'Услуги ещё загружаются. Попробуй ещё раз через секунду.'
+        );
+
+        return;
+
+      } catch (e) {}
+
+    }
+
+    alert(
+      'Услуги ещё загружаются. Попробуй ещё раз через секунду.'
+    );
+
+    return;
+
+  }
+
+
   /*
-   * На этом этапе просто открываем
-   * первую страницу и прокручиваем
-   * к услугам.
-   *
-   * В следующем этапе здесь появится
-   * настоящий booking flow.
+   * Если пользователь нажал
+   * "Записаться" снизу страницы,
+   * показываем список услуг.
    */
 
   showPage('home');
@@ -2345,7 +3024,9 @@ function openBooking() {
   if (section) {
 
     section.scrollIntoView({
+
       behavior: 'smooth'
+
     });
 
   }
@@ -2354,7 +3035,7 @@ function openBooking() {
 
 
 /*************************************************
- * BOOKING FROM SERVICE
+ * START BOOKING FROM SERVICE
  *************************************************/
 
 function startBookingFromModal() {
@@ -2366,30 +3047,14 @@ function startBookingFromModal() {
   }
 
 
-  /*
-   * Пока не отправляем запись
-   * в Google Sheets.
-   *
-   * Следующим этапом здесь будет:
-   *
-   * услуга
-   * ↓
-   * дата
-   * ↓
-   * доступные блоки
-   * ↓
-   * подтверждение
-   * ↓
-   * Записи и Продажи
-   */
-
-
   if (tg) {
 
     try {
 
       tg.HapticFeedback
-        .impactOccurred('light');
+        .impactOccurred(
+          'light'
+        );
 
     } catch (e) {}
 
@@ -2399,52 +3064,1347 @@ function startBookingFromModal() {
   closeModal();
 
 
-  showBookingComingSoon(
-    selectedService
+  resetBooking();
+
+
+  updateBookingSummary();
+
+
+  showPage('booking');
+
+
+  showBookingStep(1);
+
+}
+
+
+/*************************************************
+ * RESET BOOKING
+ *************************************************/
+
+function resetBooking() {
+
+  bookingDate =
+    null;
+
+  bookingTime =
+    null;
+
+  bookingSlots =
+    [];
+
+  bookingStep =
+    1;
+
+
+  const dateInput =
+    document.getElementById(
+      'bookingDate'
+    );
+
+
+  if (dateInput) {
+
+    dateInput.value =
+      '';
+
+    /*
+     * Нельзя выбрать прошедшую дату.
+     */
+
+    dateInput.min =
+      getTodayLocalISO();
+
+  }
+
+
+  document
+    .getElementById(
+      'bookingAvailability'
+    )
+    .innerHTML = `
+
+      <div class="booking-message">
+
+        Выбери дату, чтобы увидеть
+        доступное время.
+
+      </div>
+
+    `;
+
+
+  document
+    .getElementById(
+      'continueToConfirmButton'
+    )
+    .disabled =
+      true;
+
+
+  document
+    .getElementById(
+      'confirmBookingButton'
+    )
+    .disabled =
+      false;
+
+
+  document
+    .getElementById(
+      'bookingSubmitMessage'
+    )
+    .style.display =
+      'none';
+
+
+  document
+    .getElementById(
+      'bookingSuccess'
+    )
+    .style.display =
+      'none';
+
+}
+
+
+/*************************************************
+ * UPDATE BOOKING SUMMARY
+ *************************************************/
+
+function updateBookingSummary() {
+
+  if (!selectedService) {
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'bookingSummaryService'
+    )
+    .textContent =
+      selectedService.service;
+
+
+  document
+    .getElementById(
+      'bookingSummaryMeta'
+    )
+    .textContent =
+
+      formatLength(
+        selectedService.length
+      ) +
+
+      ' · ' +
+
+      formatPrice(
+        selectedService.price
+      ) +
+
+      ' · ' +
+
+      formatDuration(
+        selectedService.duration
+      );
+
+}
+
+
+/*************************************************
+ * BOOKING STEP
+ *************************************************/
+
+function showBookingStep(
+  step
+) {
+
+  bookingStep =
+    step;
+
+
+  const step1 =
+    document.getElementById(
+      'bookingStep1'
+    );
+
+  const step2 =
+    document.getElementById(
+      'bookingStep2'
+    );
+
+  const step3 =
+    document.getElementById(
+      'bookingStep3'
+    );
+
+  const success =
+    document.getElementById(
+      'bookingSuccess'
+    );
+
+
+  step1.style.display =
+    step === 1
+      ? 'block'
+      : 'none';
+
+
+  step2.style.display =
+    step === 2
+      ? 'block'
+      : 'none';
+
+
+  step3.style.display =
+    step === 3
+      ? 'block'
+      : 'none';
+
+
+  success.style.display =
+    'none';
+
+
+  document
+    .getElementById(
+      'progress1'
+    )
+    .classList
+    .toggle(
+      'active',
+      step >= 1
+    );
+
+
+  document
+    .getElementById(
+      'progress2'
+    )
+    .classList
+    .toggle(
+      'active',
+      step >= 2
+    );
+
+
+  document
+    .getElementById(
+      'progress3'
+    )
+    .classList
+    .toggle(
+      'active',
+      step >= 3
+    );
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: 'smooth'
+
+  });
+
+}
+
+
+/*************************************************
+ * GO TO DATE
+ *************************************************/
+
+function goToBookingDate() {
+
+  if (!selectedService) {
+
+    return;
+
+  }
+
+
+  const dateInput =
+    document.getElementById(
+      'bookingDate'
+    );
+
+
+  dateInput.min =
+    getTodayLocalISO();
+
+
+  showBookingStep(2);
+
+}
+
+
+/*************************************************
+ * GET TODAY LOCAL ISO
+ *************************************************/
+
+function getTodayLocalISO() {
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    )
+      .padStart(2, '0');
+
+
+  const day =
+    String(
+      now.getDate()
+    )
+      .padStart(2, '0');
+
+
+  return (
+    year +
+    '-' +
+    month +
+    '-' +
+    day
   );
 
 }
 
 
 /*************************************************
- * BOOKING COMING SOON
+ * LOAD AVAILABILITY
  *************************************************/
 
-function showBookingComingSoon(
-  item
-) {
+async function loadAvailability() {
 
-  const message =
-
-    item.service +
-    ' — ' +
-    formatLength(item.length) +
-    '\n\n' +
-
-    formatPrice(item.price) +
-    ' · ' +
-    formatDuration(item.duration) +
-    '\n\n' +
-
-    'Сейчас мы подключаем выбор даты и времени.';
+  const dateInput =
+    document.getElementById(
+      'bookingDate'
+    );
 
 
-  if (tg) {
+  const date =
+    dateInput.value;
 
-    try {
 
-      tg.showAlert(
-        message
-      );
+  bookingDate =
+    date ||
+    null;
 
-      return;
 
-    } catch (e) {}
+  bookingTime =
+    null;
+
+
+  document
+    .getElementById(
+      'continueToConfirmButton'
+    )
+    .disabled =
+      true;
+
+
+  if (!date) {
+
+    document
+      .getElementById(
+        'bookingAvailability'
+      )
+      .innerHTML = `
+
+        <div class="booking-message">
+
+          Выбери дату.
+
+        </div>
+
+      `;
+
+    return;
 
   }
 
 
-  alert(message);
+  if (!selectedService) {
+
+    return;
+
+  }
+
+
+  const availability =
+    document.getElementById(
+      'bookingAvailability'
+    );
+
+
+  availability.innerHTML = `
+
+    <div class="loading">
+
+      Проверяем свободное время...
+
+    </div>
+
+  `;
+
+
+  try {
+
+    const url =
+      API_URL +
+      '?action=availability' +
+      '&date=' +
+      encodeURIComponent(
+        date
+      ) +
+      '&duration=' +
+      encodeURIComponent(
+        selectedService.duration
+      );
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          method: 'GET'
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        'HTTP ' +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (!data.success) {
+
+      throw new Error(
+        data.error ||
+        'Не удалось получить доступность'
+      );
+
+    }
+
+
+    bookingSlots =
+      Array.isArray(
+        data.slots
+      )
+        ? data.slots
+        : [];
+
+
+    renderAvailability(
+      data
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      'Availability error:',
+      error
+    );
+
+
+    availability.innerHTML = `
+
+      <div class="booking-error">
+
+        Не удалось загрузить
+        свободное время.
+
+        <br><br>
+
+        ${escapeHtml(
+          error.message
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/*************************************************
+ * RENDER AVAILABILITY
+ *************************************************/
+
+function renderAvailability(
+  data
+) {
+
+  const container =
+    document.getElementById(
+      'bookingAvailability'
+    );
+
+
+  bookingTime =
+    null;
+
+
+  document
+    .getElementById(
+      'continueToConfirmButton'
+    )
+    .disabled =
+      true;
+
+
+  /*
+   * Понедельник.
+   */
+
+  if (
+    data.dayOff === true ||
+    data.available === false &&
+    data.reason === 'day_off'
+  ) {
+
+    container.innerHTML = `
+
+      <div class="booking-message">
+
+        В этот день мастер не работает.
+
+        <br><br>
+
+        Пожалуйста, выбери другую дату.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  if (!bookingSlots.length) {
+
+    container.innerHTML = `
+
+      <div class="booking-message">
+
+        На выбранную дату
+        свободного времени нет.
+
+        <br><br>
+
+        Выбери другую дату.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  const title =
+    document.createElement(
+      'div'
+    );
+
+
+  title.className =
+    'booking-card-caption';
+
+
+  title.style.marginBottom =
+    '8px';
+
+
+  title.textContent =
+    'Доступное время';
+
+
+  const slots =
+    document.createElement(
+      'div'
+    );
+
+
+  slots.className =
+    'booking-slots';
+
+
+  bookingSlots.forEach(
+    function(slot) {
+
+      /*
+       * API может вернуть
+       * либо строку,
+       * либо объект {time: "..."}.
+       */
+
+      const time =
+        typeof slot === 'string'
+          ? slot
+          : slot.time ||
+            slot.start ||
+            slot.startTime ||
+            '';
+
+
+      if (!time) {
+
+        return;
+
+      }
+
+
+      const button =
+        document.createElement(
+          'button'
+        );
+
+
+      button.type =
+        'button';
+
+
+      button.className =
+        'booking-slot';
+
+
+      button.textContent =
+        formatTime(
+          time
+        );
+
+
+      button.addEventListener(
+        'click',
+        function() {
+
+          document
+            .querySelectorAll(
+              '.booking-slot'
+            )
+            .forEach(
+              function(item) {
+
+                item.classList.remove(
+                  'selected'
+                );
+
+              }
+            );
+
+
+          button.classList.add(
+            'selected'
+          );
+
+
+          bookingTime =
+            time;
+
+
+          document
+            .getElementById(
+              'continueToConfirmButton'
+            )
+            .disabled =
+              false;
+
+
+          if (tg) {
+
+            try {
+
+              tg.HapticFeedback
+                .selectionChanged();
+
+            } catch (e) {}
+
+          }
+
+        }
+      );
+
+
+      slots.appendChild(
+        button
+      );
+
+    }
+  );
+
+
+  container.innerHTML = '';
+
+  container.appendChild(
+    title
+  );
+
+  container.appendChild(
+    slots
+  );
+
+}
+
+
+/*************************************************
+ * FORMAT TIME
+ *************************************************/
+
+function formatTime(
+  time
+) {
+
+  if (!time) {
+
+    return '—';
+
+  }
+
+
+  const value =
+    String(time);
+
+
+  /*
+   * Если API уже вернул
+   * HH:MM — ничего не меняем.
+   */
+
+  if (
+    /^\d{1,2}:\d{2}$/.test(
+      value
+    )
+  ) {
+
+    return value;
+
+  }
+
+
+  /*
+   * Если пришёл ISO/date-time,
+   * пытаемся достать часы и минуты.
+   */
+
+  const match =
+    value.match(
+      /T?(\d{1,2}):(\d{2})/
+    );
+
+
+  if (match) {
+
+    return (
+      String(
+        match[1]
+      ).padStart(2, '0') +
+      ':' +
+      match[2]
+    );
+
+  }
+
+
+  return value;
+
+}
+
+
+/*************************************************
+ * GO TO CONFIRMATION
+ *************************************************/
+
+function goToBookingConfirmation() {
+
+  if (
+    !selectedService ||
+    !bookingDate ||
+    !bookingTime
+  ) {
+
+    return;
+
+  }
+
+
+  document
+    .getElementById(
+      'confirmService'
+    )
+    .textContent =
+      selectedService.service;
+
+
+  document
+    .getElementById(
+      'confirmLength'
+    )
+    .textContent =
+
+      formatLength(
+        selectedService.length
+      ) +
+
+      ' · ' +
+
+      formatDuration(
+        selectedService.duration
+      );
+
+
+  document
+    .getElementById(
+      'confirmDate'
+    )
+    .textContent =
+      'Дата: ' +
+      formatDateForDisplay(
+        bookingDate
+      );
+
+
+  document
+    .getElementById(
+      'confirmTime'
+    )
+    .textContent =
+      'Время: ' +
+      formatTime(
+        bookingTime
+      );
+
+
+  document
+    .getElementById(
+      'confirmPrice'
+    )
+    .textContent =
+      'Стоимость: ' +
+      formatPrice(
+        selectedService.price
+      );
+
+
+  showBookingStep(3);
+
+}
+
+
+/*************************************************
+ * FORMAT DATE
+ *************************************************/
+
+function formatDateForDisplay(
+  isoDate
+) {
+
+  if (!isoDate) {
+
+    return '—';
+
+  }
+
+
+  const parts =
+    isoDate.split('-');
+
+
+  if (
+    parts.length !== 3
+  ) {
+
+    return isoDate;
+
+  }
+
+
+  return (
+    parts[2] +
+    '.' +
+    parts[1] +
+    '.' +
+    parts[0]
+  );
+
+}
+
+
+/*************************************************
+ * GET TELEGRAM USER
+ *************************************************/
+
+function getTelegramUser() {
+
+  if (
+    tg &&
+    tg.initDataUnsafe &&
+    tg.initDataUnsafe.user
+  ) {
+
+    return tg.initDataUnsafe.user;
+
+  }
+
+
+  return null;
+
+}
+
+
+/*************************************************
+ * GET TELEGRAM USER ID
+ *************************************************/
+
+function getTelegramUserId() {
+
+  const user =
+    getTelegramUser();
+
+
+  if (!user) {
+
+    return '';
+
+  }
+
+
+  return String(
+    user.id
+  );
+
+}
+
+
+/*************************************************
+ * GET CLIENT NAME
+ *************************************************/
+
+function getClientName() {
+
+  const user =
+    getTelegramUser();
+
+
+  if (!user) {
+
+    return '';
+
+  }
+
+
+  return [
+
+    user.first_name,
+
+    user.last_name
+
+  ]
+
+    .filter(Boolean)
+
+    .join(' ');
+
+}
+
+
+/*************************************************
+ * SUBMIT BOOKING
+ *************************************************/
+
+async function submitBooking() {
+
+  if (
+    !selectedService ||
+    !bookingDate ||
+    !bookingTime
+  ) {
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      'confirmBookingButton'
+    );
+
+
+  const message =
+    document.getElementById(
+      'bookingSubmitMessage'
+    );
+
+
+  button.disabled =
+    true;
+
+
+  button.textContent =
+    'Создаём запись...';
+
+
+  message.style.display =
+    'block';
+
+
+  message.textContent =
+    'Проверяем свободное время и создаём запись...';
+
+
+  try {
+
+    const telegramUserId =
+      getTelegramUserId();
+
+
+    const clientName =
+      getClientName();
+
+
+    /*
+     * Важно:
+     *
+     * Цена и длительность
+     * берутся из выбранного объекта,
+     * который пришёл из Google Sheets.
+     *
+     * Code.gs дополнительно
+     * перепроверяет их на сервере.
+     */
+
+    const payload = {
+
+      action:
+        'createBooking',
+
+      telegramUserId:
+        telegramUserId,
+
+      clientName:
+        clientName,
+
+      service:
+        selectedService.service,
+
+      length:
+        selectedService.length,
+
+      price:
+        selectedService.price,
+
+      duration:
+        selectedService.duration,
+
+      date:
+        bookingDate,
+
+      time:
+        bookingTime
+
+    };
+
+
+    /*
+     * Apps Script doPost.
+     */
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+
+          method:
+            'POST',
+
+          headers: {
+
+            'Content-Type':
+              'text/plain;charset=utf-8'
+
+          },
+
+          body:
+            JSON.stringify(
+              payload
+            )
+
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        'HTTP ' +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !data.success
+    ) {
+
+      throw new Error(
+        data.error ||
+        'Не удалось создать запись'
+      );
+
+    }
+
+
+    /*
+     * Успешное бронирование.
+     */
+
+    const bookingId =
+      data.bookingId ||
+      data.bookingID ||
+      data.id ||
+      'Создано';
+
+
+    document
+      .getElementById(
+        'successBookingId'
+      )
+      .textContent =
+        bookingId;
+
+
+    document
+      .getElementById(
+        'successText'
+      )
+      .textContent =
+
+        formatDateForDisplay(
+          bookingDate
+        ) +
+
+        ' · ' +
+
+        formatTime(
+          bookingTime
+        ) +
+
+        ' · ' +
+
+        selectedService.service;
+
+
+    document
+      .getElementById(
+        'bookingStep1'
+      )
+      .style.display =
+        'none';
+
+
+    document
+      .getElementById(
+        'bookingStep2'
+      )
+      .style.display =
+        'none';
+
+
+    document
+      .getElementById(
+        'bookingStep3'
+      )
+      .style.display =
+        'none';
+
+
+    document
+      .getElementById(
+        'bookingSuccess'
+      )
+      .style.display =
+        'block';
+
+
+    document
+      .getElementById(
+        'progress1'
+      )
+      .classList
+      .add('active');
+
+
+    document
+      .getElementById(
+        'progress2'
+      )
+      .classList
+      .add('active');
+
+
+    document
+      .getElementById(
+        'progress3'
+      )
+      .classList
+      .add('active');
+
+
+    button.textContent =
+      'Готово';
+
+
+    if (tg) {
+
+      try {
+
+        tg.HapticFeedback
+          .notificationOccurred(
+            'success'
+          );
+
+      } catch (e) {}
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      'Booking error:',
+      error
+    );
+
+
+    message.style.display =
+      'block';
+
+
+    message.className =
+      'booking-error';
+
+
+    message.innerHTML =
+
+      'Не удалось создать запись.' +
+
+      '<br><br>' +
+
+      escapeHtml(
+        error.message
+      );
+
+
+    button.disabled =
+      false;
+
+
+    button.textContent =
+      'Попробовать снова';
+
+  }
+
+}
+
+
+/*************************************************
+ * FINISH BOOKING
+ *************************************************/
+
+function finishBooking() {
+
+  selectedService =
+    null;
+
+  selectedLength =
+    null;
+
+  bookingDate =
+    null;
+
+  bookingTime =
+    null;
+
+  bookingSlots =
+    [];
+
+
+  document
+    .getElementById(
+      'bookingSuccess'
+    )
+    .style.display =
+      'none';
+
+
+  showPage('home');
+
+
+  window.scrollTo({
+
+    top: 0,
+
+    behavior: 'smooth'
+
+  });
+
+}
+
+
+/*************************************************
+ * BACK TO SERVICES
+ *************************************************/
+
+function backToServices() {
+
+  showPage('home');
+
+
+  const section =
+    document.querySelector(
+      '#homePage .section'
+    );
+
+
+  if (section) {
+
+    section.scrollIntoView({
+
+      behavior: 'smooth'
+
+    });
+
+  }
 
 }
 
@@ -2460,12 +4420,6 @@ function setupMasterAccess() {
       'masterNav'
     );
 
-
-  /*
-   * Если Telegram недоступен
-   * или ID мастера ещё не задан —
-   * скрываем вкладку.
-   */
 
   if (
     !tg ||
@@ -2550,10 +4504,6 @@ function setupTelegramUser() {
   }
 
 
-  /*
-   * Telegram profile photo
-   */
-
   if (
     user.photo_url
   ) {
@@ -2578,14 +4528,6 @@ function setupTelegramUser() {
   }
 
 
-  /*
-   * Пока показываем Telegram
-   * имя как базовую информацию.
-   *
-   * Позже заменим это
-   * данными из листа "Клиенты".
-   */
-
   document
     .getElementById(
       'passportCaption'
@@ -2600,7 +4542,9 @@ function setupTelegramUser() {
  * FORMAT LENGTH
  *************************************************/
 
-function formatLength(length) {
+function formatLength(
+  length
+) {
 
   const labels = {
 
@@ -2623,7 +4567,9 @@ function formatLength(length) {
 
 
   const key =
-    String(length || '')
+    String(
+      length || ''
+    )
       .trim()
       .toLowerCase();
 
@@ -2639,7 +4585,9 @@ function formatLength(length) {
  * FORMAT PRICE
  *************************************************/
 
-function formatPrice(price) {
+function formatPrice(
+  price
+) {
 
   if (
     price === null ||
