@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,611 +12,1328 @@
 
   <title>Hair Passport</title>
 
+  <!-- Telegram Mini App -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
+
   <style>
+
     :root {
-      --bg: var(--tg-theme-bg-color, #ffffff);
-      --text: var(--tg-theme-text-color, #111111);
-      --hint: var(--tg-theme-hint-color, #777777);
-      --button: var(--tg-theme-button-color, #111111);
-      --button-text: var(--tg-theme-button-text-color, #ffffff);
-      --secondary: var(--tg-theme-secondary-bg-color, #f3f3f3);
-      --danger: #d64545;
-      --success: #238636;
+
+      --bg: #f7f6f3;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #777777;
+      --line: #e8e6e1;
+      --accent: #171717;
+      --soft: #efede8;
+      --white: #ffffff;
+
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+
     }
+
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
+
+    html,
     body {
+
       margin: 0;
-      padding: 0 0 90px;
+      padding: 0;
+
+      width: 100%;
+      min-height: 100%;
+
+      background: var(--bg);
+      color: var(--text);
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
         sans-serif;
-      background: var(--bg);
-      color: var(--text);
+
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
+
+    body {
+
+      overflow-x: hidden;
+
     }
+
 
     button {
-      cursor: pointer;
+
+      font: inherit;
+
     }
 
-    .app {
-      max-width: 700px;
-      margin: 0 auto;
+
+    #app {
+
+      min-height: 100vh;
+
+      padding-bottom: 90px;
+
     }
 
-    header {
-      padding: 24px 20px 14px;
+
+    /* =========================================
+       HEADER
+       ========================================= */
+
+    .top-header {
+
+      padding:
+        calc(18px + env(safe-area-inset-top))
+        20px
+        14px
+        20px;
+
     }
 
-    .eyebrow {
-      color: var(--hint);
+
+    .brand {
+
       font-size: 13px;
-      margin-bottom: 6px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+
+      color: var(--muted);
+
+      margin-bottom: 8px;
+
     }
 
-    h1 {
-      font-size: 28px;
-      line-height: 1.1;
+
+    .page-title {
+
       margin: 0;
+
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 600;
+
+      letter-spacing: -0.04em;
+
     }
 
-    .welcome {
-      margin-top: 8px;
-      color: var(--hint);
-      font-size: 15px;
+
+    /* =========================================
+       PAGES
+       ========================================= */
+
+    .page {
+
+      display: none;
+
+      padding: 0 16px 24px;
+
     }
 
-    main {
-      padding: 0 20px;
+
+    .page.active {
+
+      display: block;
+
     }
+
+
+    /* =========================================
+       HERO
+       ========================================= */
 
     .hero {
-      background: var(--secondary);
-      border-radius: 22px;
-      padding: 22px;
-      margin: 8px 0 18px;
+
+      margin: 8px 0 22px;
+
+      background: var(--card);
+
+      border-radius: var(--radius-lg);
+
+      padding: 26px 22px;
+
     }
 
-    .hero h2 {
-      margin: 0 0 8px;
-      font-size: 22px;
+
+    .hero-title {
+
+      margin: 0 0 10px;
+
+      font-size: 28px;
+      line-height: 1.08;
+
+      letter-spacing: -0.04em;
+
     }
 
-    .hero p {
+
+    .hero-text {
+
       margin: 0;
-      color: var(--hint);
-      line-height: 1.45;
+
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1.55;
+
     }
+
+
+    /* =========================================
+       SECTION
+       ========================================= */
 
     .section {
-      margin: 20px 0;
+
+      margin-top: 24px;
+
     }
 
-    .section h3 {
-      margin: 0 0 12px;
-      font-size: 18px;
+
+    .section-header {
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+
     }
 
-    .card {
-      background: var(--secondary);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 10px;
+
+    .section-title {
+
+      margin: 0;
+
+      font-size: 20px;
+      font-weight: 600;
+
+      letter-spacing: -0.02em;
+
     }
+
+
+    .section-caption {
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+    }
+
+
+    /* =========================================
+       SERVICES
+       ========================================= */
+
+    .services-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
 
     .service-card {
+
+      background: var(--card);
+
+      border-radius: var(--radius-md);
+
+      overflow: hidden;
+
+    }
+
+
+    .service-main {
+
       width: 100%;
+
       border: 0;
-      text-align: left;
-      color: var(--text);
-      background: var(--secondary);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 10px;
-    }
+      background: transparent;
 
-    .service-card:active {
-      opacity: .75;
-    }
+      padding: 19px;
 
-    .service-title {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .service-meta {
-      margin-top: 6px;
-      color: var(--hint);
-      font-size: 13px;
-    }
-
-    .row {
       display: flex;
+
+      align-items: center;
       justify-content: space-between;
-      gap: 15px;
-      padding: 7px 0;
+
+      text-align: left;
+
+      cursor: pointer;
+
+      color: var(--text);
+
     }
 
-    .label {
-      color: var(--hint);
+
+    .service-main:active {
+
+      background: var(--soft);
+
     }
 
-    .value {
+
+    .service-name {
+
+      font-size: 17px;
+
+      font-weight: 500;
+
+      line-height: 1.25;
+
+    }
+
+
+    .service-subtitle {
+
+      margin-top: 5px;
+
+      font-size: 13px;
+
+      color: var(--muted);
+
+    }
+
+
+    .service-arrow {
+
+      width: 30px;
+      height: 30px;
+
+      border-radius: 50%;
+
+      background: var(--soft);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
+      transition: transform 0.2s ease;
+
+    }
+
+
+    .service-card.open
+    .service-arrow {
+
+      transform: rotate(180deg);
+
+    }
+
+
+    .service-options {
+
+      display: none;
+
+      padding: 0 12px 12px;
+
+    }
+
+
+    .service-card.open
+    .service-options {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 8px;
+
+    }
+
+
+    .length-option {
+
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      background: #fafafa;
+
+      border-radius: 14px;
+
+      padding: 15px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      text-align: left;
+
+      cursor: pointer;
+
+    }
+
+
+    .length-option:active {
+
+      background: var(--soft);
+
+    }
+
+
+    .length-left {
+
+      min-width: 0;
+
+    }
+
+
+    .length-name {
+
+      font-size: 15px;
+
+      font-weight: 500;
+
+    }
+
+
+    .length-description {
+
+      margin-top: 4px;
+
+      font-size: 12px;
+
+      color: var(--muted);
+
+    }
+
+
+    .length-right {
+
       text-align: right;
-      font-weight: 600;
+
+      flex-shrink: 0;
+
+      margin-left: 12px;
+
     }
 
-    button.primary {
-      width: 100%;
-      border: 0;
-      border-radius: 16px;
-      padding: 15px 18px;
+
+    .length-price {
+
       font-size: 16px;
-      font-weight: 700;
-      background: var(--button);
-      color: var(--button-text);
+
+      font-weight: 600;
+
     }
 
-    button.secondary-button {
+
+    .length-duration {
+
+      margin-top: 3px;
+
+      font-size: 11px;
+
+      color: var(--muted);
+
+    }
+
+
+    /* =========================================
+       BOOKING
+       ========================================= */
+
+    .booking-button {
+
       width: 100%;
+
       border: 0;
+
+      background: var(--accent);
+      color: var(--white);
+
       border-radius: 16px;
-      padding: 14px 18px;
+
+      padding: 17px 20px;
+
       font-size: 15px;
       font-weight: 600;
-      background: var(--secondary);
-      color: var(--text);
-      margin-top: 10px;
+
+      cursor: pointer;
+
     }
 
-    .passport-avatar {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-      margin-bottom: 14px;
-      background: var(--secondary);
+
+    .booking-button:active {
+
+      opacity: 0.8;
+
     }
 
-    .tabs {
+
+    .booking-fixed {
+
       position: fixed;
+
+      left: 16px;
+      right: 16px;
+
+      bottom:
+        calc(70px + env(safe-area-inset-bottom));
+
+      z-index: 20;
+
+    }
+
+
+    /* =========================================
+       INFO CARD
+       ========================================= */
+
+    .info-card {
+
+      background: var(--card);
+
+      border-radius: var(--radius-md);
+
+      padding: 20px;
+
+    }
+
+
+    .info-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 12px 0;
+
+      border-bottom: 1px solid var(--line);
+
+    }
+
+
+    .info-row:last-child {
+
+      border-bottom: 0;
+
+    }
+
+
+    .info-label {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    .info-value {
+
+      text-align: right;
+
+      font-size: 14px;
+
+    }
+
+
+    /* =========================================
+       PASSPORT
+       ========================================= */
+
+    .passport-header {
+
+      background: var(--card);
+
+      border-radius: var(--radius-lg);
+
+      padding: 24px;
+
+      text-align: center;
+
+    }
+
+
+    .avatar {
+
+      width: 88px;
+      height: 88px;
+
+      margin: 0 auto 14px;
+
+      border-radius: 50%;
+
+      background: var(--soft);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 30px;
+
+      overflow: hidden;
+
+    }
+
+
+    .avatar img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+
+    .passport-name {
+
+      font-size: 22px;
+
+      font-weight: 600;
+
+    }
+
+
+    .passport-caption {
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    .passport-grid {
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 12px;
+
+    }
+
+
+    .passport-item {
+
+      background: var(--card);
+
+      border-radius: 16px;
+
+      padding: 17px;
+
+    }
+
+
+    .passport-item-label {
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .passport-item-value {
+
+      font-size: 15px;
+
+      font-weight: 500;
+
+    }
+
+
+    /* =========================================
+       MASTER CARD
+       ========================================= */
+
+    .master-list {
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 10px;
+
+    }
+
+
+    .master-client {
+
+      background: var(--card);
+
+      border-radius: var(--radius-md);
+
+      padding: 18px;
+
+      cursor: pointer;
+
+    }
+
+
+    .master-client-name {
+
+      font-size: 16px;
+
+      font-weight: 600;
+
+    }
+
+
+    .master-client-meta {
+
+      margin-top: 6px;
+
+      font-size: 13px;
+
+      color: var(--muted);
+
+    }
+
+
+    .master-empty {
+
+      background: var(--card);
+
+      border-radius: var(--radius-md);
+
+      padding: 22px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* =========================================
+       BOTTOM NAV
+       ========================================= */
+
+    .bottom-nav {
+
+      position: fixed;
+
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 10;
+
+      z-index: 30;
+
       padding:
         8px
-        10px
+        12px
         calc(8px + env(safe-area-inset-bottom));
-      background: var(--bg);
-      border-top: 1px solid rgba(127,127,127,.15);
+
+      background: rgba(247, 246, 243, 0.94);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+
     }
 
-    .tabs-inner {
-      max-width: 700px;
+
+    .nav-inner {
+
+      max-width: 600px;
+
       margin: 0 auto;
+
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+
+      grid-template-columns: 1fr 1fr 1fr;
+
       gap: 6px;
+
     }
 
-    .tab {
+
+    .nav-button {
+
       border: 0;
+
       background: transparent;
-      color: var(--hint);
-      border-radius: 12px;
-      padding: 10px 5px;
-      font-size: 12px;
-    }
 
-    .tab.active {
-      color: var(--text);
-      background: var(--secondary);
-      font-weight: 700;
-    }
+      color: var(--muted);
 
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .note {
-      color: var(--hint);
-      font-size: 13px;
-      line-height: 1.4;
-      margin-top: 12px;
-    }
-
-    .status {
-      padding: 12px 14px;
       border-radius: 14px;
-      background: var(--secondary);
-      color: var(--hint);
-      font-size: 14px;
-      margin-bottom: 12px;
+
+      padding: 9px 5px;
+
+      cursor: pointer;
+
+      font-size: 11px;
+
+      line-height: 1.2;
+
     }
 
-    .status.error {
-      color: var(--danger);
+
+    .nav-button.active {
+
+      background: var(--card);
+
+      color: var(--text);
+
     }
 
-    .status.success {
-      color: var(--success);
+
+    .nav-icon {
+
+      display: block;
+
+      font-size: 18px;
+
+      margin-bottom: 3px;
+
     }
 
-    .empty {
+
+    /* =========================================
+       LOADING
+       ========================================= */
+
+    .loading {
+
+      padding: 35px 20px;
+
       text-align: center;
-      color: var(--hint);
-      padding: 20px 10px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
     }
+
+
+    .error {
+
+      background: #fff;
+
+      border-radius: 18px;
+
+      padding: 20px;
+
+      color: #8a2424;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* =========================================
+       MODAL
+       ========================================= */
 
     .modal {
+
       display: none;
+
       position: fixed;
+
       inset: 0;
-      z-index: 20;
-      background: rgba(0,0,0,.45);
+
+      z-index: 100;
+
+      background: rgba(0, 0, 0, 0.35);
+
       align-items: flex-end;
-      justify-content: center;
+
     }
 
-    .modal.show {
+
+    .modal.open {
+
       display: flex;
+
     }
 
-    .modal-card {
+
+    .modal-content {
+
       width: 100%;
-      max-width: 700px;
-      max-height: 90vh;
+
+      max-height: 85vh;
+
       overflow-y: auto;
+
       background: var(--bg);
-      border-radius: 24px 24px 0 0;
+
+      border-radius:
+        26px
+        26px
+        0
+        0;
+
       padding:
-        24px
         20px
-        calc(24px + env(safe-area-inset-bottom));
+        16px
+        calc(25px + env(safe-area-inset-bottom));
+
+      animation: slideUp 0.22s ease;
+
     }
 
-    .modal-card h3 {
-      margin: 0 0 10px;
-    }
 
-    .close {
-      margin-top: 10px;
-      width: 100%;
-      border: 0;
-      background: var(--secondary);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 15px;
-    }
+    @keyframes slideUp {
 
-    .master-badge {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: var(--secondary);
-      margin-bottom: 10px;
-    }
+      from {
 
-    .length-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin: 12px 0;
-    }
+        transform: translateY(100%);
 
-    .length-button {
-      border: 0;
-      background: var(--secondary);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 14px 10px;
-      font-weight: 600;
-      text-align: left;
-    }
-
-    .length-button.selected {
-      outline: 2px solid var(--button);
-    }
-
-    .booking-summary {
-      margin-top: 16px;
-      padding: 16px;
-      border-radius: 18px;
-      background: var(--secondary);
-    }
-
-    .booking-summary .price {
-      font-size: 24px;
-      font-weight: 800;
-      margin-top: 8px;
-    }
-
-    .booking-list-item {
-      background: var(--secondary);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 10px;
-    }
-
-    .booking-list-item strong {
-      display: block;
-      margin-bottom: 7px;
-    }
-
-    .loader {
-      text-align: center;
-      padding: 20px;
-      color: var(--hint);
-    }
-
-    @media (max-width: 380px) {
-      .length-grid {
-        grid-template-columns: 1fr;
       }
+
+      to {
+
+        transform: translateY(0);
+
+      }
+
     }
+
+
+    .modal-handle {
+
+      width: 38px;
+      height: 4px;
+
+      border-radius: 10px;
+
+      background: #d5d2cc;
+
+      margin: 0 auto 20px;
+
+    }
+
+
+    .modal-title {
+
+      font-size: 23px;
+
+      font-weight: 600;
+
+      letter-spacing: -0.03em;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .modal-description {
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.5;
+
+      margin-bottom: 18px;
+
+    }
+
+
+    .modal-details {
+
+      background: var(--card);
+
+      border-radius: 18px;
+
+      padding: 17px;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .modal-detail-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      padding: 8px 0;
+
+    }
+
+
+    .modal-detail-label {
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+    }
+
+
+    .modal-detail-value {
+
+      font-size: 14px;
+
+      font-weight: 500;
+
+    }
+
+
+    .modal-close {
+
+      width: 100%;
+
+      border: 0;
+
+      background: var(--soft);
+
+      color: var(--text);
+
+      border-radius: 15px;
+
+      padding: 15px;
+
+      cursor: pointer;
+
+      margin-top: 8px;
+
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (min-width: 700px) {
+
+      body {
+
+        max-width: 700px;
+
+        margin: 0 auto;
+
+      }
+
+
+      .bottom-nav {
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 700px;
+
+      }
+
+
+      .booking-fixed {
+
+        max-width: 668px;
+
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: calc(100% - 32px);
+
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-<div class="app">
 
-  <header>
-    <div class="eyebrow">
-      DIGITAL HAIR EXPERIENCE
+<div id="app">
+
+
+  <!-- =======================================
+       HEADER
+       ======================================== -->
+
+  <header class="top-header">
+
+    <div class="brand">
+      HAIR PASSPORT
     </div>
 
-    <h1>
-      Hair Passport
+    <h1
+      id="pageTitle"
+      class="page-title"
+    >
+      Главная
     </h1>
 
-    <div
-      class="welcome"
-      id="welcome"
-    >
-      Добро пожаловать 👋
-    </div>
   </header>
 
 
-  <main>
+  <!-- =======================================
+       HOME
+       ======================================== -->
 
-    <!-- =========================
-         ГЛАВНАЯ
-    ========================== -->
+  <main
+    id="homePage"
+    class="page active"
+  >
 
-    <section
-      id="page-home"
-      class="page active"
-    >
+    <section class="hero">
 
-      <div class="hero">
+      <h2 class="hero-title">
+        Your hair,<br>
+        your passport.
+      </h2>
 
-        <h2>
-          Ваш мастер и ваша история волос
+      <p class="hero-text">
+        Персональный подход к волосам,
+        история процедур и запись
+        к мастеру в одном месте.
+      </p>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          Услуги
         </h2>
 
-        <p>
-          Услуги, персональная история волос
-          и запись к мастеру — в одном месте.
-        </p>
+        <span
+          id="servicesCount"
+          class="section-caption"
+        >
+          Загрузка...
+        </span>
 
       </div>
 
 
       <div
-        id="profile-status"
-        class="status"
-        style="display:none;"
-      ></div>
+        id="servicesList"
+        class="services-list"
+      >
+
+        <div class="loading">
+          Загружаем услуги...
+        </div>
+
+      </div>
+
+    </section>
 
 
-      <div class="section">
+    <section class="section">
 
-        <h3>
-          Услуги
-        </h3>
+      <div class="section-header">
 
-        <div id="services-container">
+        <h2 class="section-title">
+          О мастере
+        </h2>
 
-          <div class="loader">
-            Загружаем услуги…
-          </div>
+      </div>
+
+
+      <div class="info-card">
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Формат
+          </span>
+
+          <span class="info-value">
+            Персональная работа
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Запись
+          </span>
+
+          <span class="info-value">
+            По предварительной записи
+          </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+          <span class="info-label">
+            Hair Passport
+          </span>
+
+          <span class="info-value">
+            Персональная история волос
+          </span>
 
         </div>
 
       </div>
 
+    </section>
+
+
+    <div class="booking-fixed">
 
       <button
-        class="primary"
-        type="button"
+        class="booking-button"
         onclick="openBooking()"
       >
         Записаться
       </button>
 
+    </div>
 
-      <div class="section">
+  </main>
 
-        <h3>
-          Мои записи
-        </h3>
 
-        <div id="bookings-container">
+  <!-- =======================================
+       HAIR PASSPORT
+       ======================================== -->
 
-          <div class="loader">
-            Загружаем записи…
-          </div>
+  <main
+    id="passportPage"
+    class="page"
+  >
 
-        </div>
+    <section class="passport-header">
 
+      <div
+        id="passportAvatar"
+        class="avatar"
+      >
+        ✦
+      </div>
+
+
+      <div
+        id="passportName"
+        class="passport-name"
+      >
+        Hair Passport
+      </div>
+
+
+      <div
+        id="passportCaption"
+        class="passport-caption"
+      >
+        Персональная карта волос
       </div>
 
     </section>
 
 
-    <!-- =========================
-         ПАСПОРТ
-    ========================== -->
+    <section class="section">
 
-    <section
-      id="page-passport"
-      class="page"
-    >
+      <div class="section-header">
 
-      <div class="section">
+        <h2 class="section-title">
+          Мои волосы
+        </h2>
 
-        <h3>
-          My Digital Hair Passport
-        </h3>
+      </div>
 
 
-        <div class="card">
+      <div class="passport-grid">
 
-          <img
-            id="avatar"
-            class="passport-avatar"
-            alt="Аватар"
+
+        <div class="passport-item">
+
+          <div class="passport-item-label">
+            Тип волос
+          </div>
+
+          <div
+            id="hairType"
+            class="passport-item-value"
           >
-
-
-          <div class="row">
-
-            <span class="label">
-              Имя
-            </span>
-
-            <span
-              class="value"
-              id="passport-name"
-            >
-              —
-            </span>
-
+            Пока не заполнено
           </div>
 
+        </div>
 
-          <div class="row">
 
-            <span class="label">
-              Client ID
-            </span>
+        <div class="passport-item">
 
-            <span
-              class="value"
-              id="passport-client-id"
-            >
-              —
-            </span>
-
+          <div class="passport-item-label">
+            Форма лица
           </div>
 
-
-          <div class="row">
-
-            <span class="label">
-              Тип волос
-            </span>
-
-            <span class="value">
-              Не заполнено
-            </span>
-
+          <div
+            id="faceType"
+            class="passport-item-value"
+          >
+            Пока не заполнено
           </div>
 
+        </div>
 
-          <div class="row">
 
-            <span class="label">
-              Тип лица
-            </span>
+        <div class="passport-item">
 
-            <span class="value">
-              Не заполнено
-            </span>
-
+          <div class="passport-item-label">
+            Цвет волос
           </div>
 
-
-          <div class="row">
-
-            <span class="label">
-              Цвет волос
-            </span>
-
-            <span class="value">
-              Не заполнено
-            </span>
-
+          <div
+            id="hairColor"
+            class="passport-item-value"
+          >
+            Пока не заполнено
           </div>
 
+        </div>
 
-          <div class="row">
 
-            <span class="label">
-              Последний визит
-            </span>
+        <div class="passport-item">
 
-            <span
-              class="value"
-              id="passport-last-visit"
-            >
-              —
-            </span>
-
+          <div class="passport-item-label">
+            Следующий визит
           </div>
 
-
-          <div class="row">
-
-            <span class="label">
-              Визитов
-            </span>
-
-            <span
-              class="value"
-              id="passport-visits"
-            >
-              —
-            </span>
-
-          </div>
-
-
-          <div class="row">
-
-            <span class="label">
-              Рекомендации
-            </span>
-
-            <span class="value">
-              Появятся позже
-            </span>
-
+          <div
+            id="nextVisit"
+            class="passport-item-value"
+          >
+            Будет рассчитан
           </div>
 
         </div>
@@ -624,99 +1343,105 @@
     </section>
 
 
-    <!-- =========================
-         КАРТА МАСТЕРА
-    ========================== -->
+    <section class="section">
 
-    <section
-      id="page-master"
-      class="page"
-    >
+      <div class="section-header">
 
-      <div class="section">
+        <h2 class="section-title">
+          Рекомендации
+        </h2>
 
-        <span class="master-badge">
-          MASTER MODE
-        </span>
-
-        <h3>
-          Карта мастера
-        </h3>
+      </div>
 
 
-        <div class="card">
+      <div class="info-card">
 
-          <div class="row">
-
-            <span class="label">
-              Любимый напиток
-            </span>
-
-            <span class="value">
-              Кофе
-            </span>
-
-          </div>
-
-
-          <div class="row">
-
-            <span class="label">
-              Последний визит
-            </span>
-
-            <span
-              class="value"
-              id="master-last-visit"
-            >
-              —
-            </span>
-
-          </div>
-
-
-          <div class="row">
-
-            <span class="label">
-              Количество визитов
-            </span>
-
-            <span
-              class="value"
-              id="master-visits"
-            >
-              —
-            </span>
-
-          </div>
-
+        <div
+          id="careRecommendation"
+          style="
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+          "
+        >
+          Персональные рекомендации
+          появятся после заполнения
+          Hair Passport.
         </div>
 
+      </div>
 
-        <div class="card">
-
-          <strong>
-            История процедур
-          </strong>
-
-          <p class="note">
-            Здесь позже будет история клиента
-            из Google Sheets.
-          </p>
-
-        </div>
+    </section>
 
 
-        <div class="card">
+    <section class="section">
 
-          <strong>
-            Заметки мастера
-          </strong>
+      <div class="section-header">
 
-          <p class="note">
-            Здесь позже появятся персональные
-            заметки по клиенту.
-          </p>
+        <h2 class="section-title">
+          История
+        </h2>
+
+      </div>
+
+
+      <div class="master-empty">
+
+        Здесь будет история твоих процедур,
+        использованных техник, продуктов
+        и фотографий результата.
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================
+       MASTER CARD
+       ======================================== -->
+
+  <main
+    id="masterPage"
+    class="page"
+  >
+
+    <section class="hero">
+
+      <h2 class="hero-title">
+        Карта мастера
+      </h2>
+
+      <p class="hero-text">
+        Рабочее пространство мастера:
+        клиенты, история процедур,
+        записи и персональные данные.
+      </p>
+
+    </section>
+
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <h2 class="section-title">
+          Клиенты
+        </h2>
+
+      </div>
+
+
+      <div
+        id="masterClients"
+        class="master-list"
+      >
+
+        <div class="master-empty">
+
+          Раздел будет подключён
+          к листу «Клиенты».
 
         </div>
 
@@ -727,178 +1452,185 @@
   </main>
 
 
-  <!-- =========================
-       TABS
-  ========================== -->
-
-  <nav class="tabs">
-
-    <div
-      class="tabs-inner"
-      id="tabs-inner"
-    >
-
-      <button
-        class="tab active"
-        type="button"
-        onclick="showPage('home', this)"
-      >
-        🏠
-        <br>
-        Главная
-      </button>
-
-
-      <button
-        class="tab"
-        type="button"
-        onclick="showPage('passport', this)"
-      >
-        💇
-        <br>
-        Passport
-      </button>
-
-
-      <button
-        class="tab"
-        id="master-tab"
-        type="button"
-        onclick="showPage('master', this)"
-      >
-        👑
-        <br>
-        Карта мастера
-      </button>
-
-    </div>
-
-  </nav>
-
 </div>
 
 
-<!-- =========================
-     BOOKING MODAL
-========================== -->
+<!-- =========================================
+     BOTTOM NAV
+     ========================================== -->
+
+<nav class="bottom-nav">
+
+  <div class="nav-inner">
+
+
+    <button
+      class="nav-button active"
+      data-page="home"
+      onclick="showPage('home')"
+    >
+
+      <span class="nav-icon">
+        ⌂
+      </span>
+
+      Главная
+
+    </button>
+
+
+    <button
+      class="nav-button"
+      data-page="passport"
+      onclick="showPage('passport')"
+    >
+
+      <span class="nav-icon">
+        ◇
+      </span>
+
+      Hair Passport
+
+    </button>
+
+
+    <button
+      id="masterNav"
+      class="nav-button"
+      data-page="master"
+      onclick="showPage('master')"
+    >
+
+      <span class="nav-icon">
+        ◎
+      </span>
+
+      Карта мастера
+
+    </button>
+
+
+  </div>
+
+</nav>
+
+
+<!-- =========================================
+     SERVICE MODAL
+     ========================================== -->
 
 <div
+  id="serviceModal"
   class="modal"
-  id="booking-modal"
-  onclick="closeBooking(event)"
+  onclick="closeModalFromBackground(event)"
 >
 
-  <div
-    class="modal-card"
-    onclick="event.stopPropagation()"
-  >
+  <div class="modal-content">
 
-    <h3>
-      Запись
-    </h3>
+    <div class="modal-handle"></div>
 
 
     <div
-      id="booking-status"
-      class="status"
-      style="display:none;"
-    ></div>
-
-
-    <!-- STEP 1 -->
-
-    <div id="booking-step-service">
-
-      <div class="note">
-        Выберите услугу.
-      </div>
-
-      <div
-        id="booking-services"
-        style="margin-top:12px;"
-      ></div>
-
+      id="modalTitle"
+      class="modal-title"
+    >
+      Услуга
     </div>
 
 
-    <!-- STEP 2 -->
-
     <div
-      id="booking-step-length"
-      style="display:none;"
+      id="modalDescription"
+      class="modal-description"
     >
-
-      <h3>
-        Длина волос
-      </h3>
-
-      <div
-        id="length-options"
-        class="length-grid"
-      ></div>
-
-      <button
-        class="secondary-button"
-        type="button"
-        onclick="backToServices()"
-      >
-        ← Назад
-      </button>
-
+      Описание услуги
     </div>
 
 
-    <!-- STEP 3 -->
-
     <div
-      id="booking-step-summary"
-      style="display:none;"
+      id="modalDetails"
+      class="modal-details"
     >
 
-      <h3>
-        Ваша запись
-      </h3>
+      <div class="modal-detail-row">
 
+        <span class="modal-detail-label">
+          Длина
+        </span>
 
-      <div
-        class="booking-summary"
-        id="booking-summary"
-      ></div>
+        <span
+          id="modalLength"
+          class="modal-detail-value"
+        >
+          —
+        </span>
 
-
-      <div
-        class="note"
-        style="margin-top:16px;"
-      >
-        Выбор даты и времени подключим следующим этапом.
       </div>
 
 
-      <button
-        class="primary"
-        type="button"
-        onclick="requestBooking()"
-        style="margin-top:16px;"
-      >
-        Продолжить
-      </button>
+      <div class="modal-detail-row">
+
+        <span class="modal-detail-label">
+          Стоимость
+        </span>
+
+        <span
+          id="modalPrice"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
 
 
-      <button
-        class="secondary-button"
-        type="button"
-        onclick="backToLengths()"
+      <div class="modal-detail-row">
+
+        <span class="modal-detail-label">
+          Длительность
+        </span>
+
+        <span
+          id="modalDuration"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
+
+
+      <div
+        id="modalWearRow"
+        class="modal-detail-row"
       >
-        ← Изменить длину
-      </button>
+
+        <span class="modal-detail-label">
+          Срок носки
+        </span>
+
+        <span
+          id="modalWear"
+          class="modal-detail-value"
+        >
+          —
+        </span>
+
+      </div>
 
     </div>
 
 
     <button
-      class="close"
-      type="button"
-      onclick="closeBooking()"
+      class="booking-button"
+      onclick="startBookingFromModal()"
+    >
+      Записаться на эту услугу
+    </button>
+
+
+    <button
+      class="modal-close"
+      onclick="closeModal()"
     >
       Закрыть
     </button>
@@ -910,9 +1642,48 @@
 
 <script>
 
-/* =====================================================
-   TELEGRAM
-===================================================== */
+/*************************************************
+ * CONFIG
+ *************************************************/
+
+/*
+ * ВАЖНО:
+ *
+ * СЮДА ВСТАВЬ ТВОЙ РАБОЧИЙ URL APPS SCRIPT.
+ *
+ * Нужен URL ДО /exec.
+ *
+ * ПРАВИЛЬНО:
+ *
+ * https://script.google.com/macros/s/XXXXXXXX/exec
+ *
+ * НЕ нужно:
+ *
+ * https://script.googleusercontent.com/...
+ *
+ */
+
+const API_URL =
+  'https://script.google.com/macros/s/AKfycbyx_dyC150F-jebHBEfSMAMddrkCRiPFtMTxb5S0wIOyIsdMhQSfvpKCStX7JXhMxSK/exec';
+
+
+/*
+ * Telegram User ID мастера.
+ *
+ * Пока оставляем пустым.
+ *
+ * Когда будем подключать
+ * реальную роль мастера,
+ * сюда поставим Telegram User ID
+ * мастера.
+ */
+
+const MASTER_TELEGRAM_ID = '';
+
+
+/*************************************************
+ * TELEGRAM
+ *************************************************/
 
 const tg =
   window.Telegram &&
@@ -930,55 +1701,9 @@ if (tg) {
 }
 
 
-/*
- * Настоящий Telegram initData.
- *
- * Именно его сервер будет проверять.
- */
-const initData =
-  tg
-    ? tg.initData
-    : "";
-
-
-/*
- * Для визуального интерфейса
- * можно использовать initDataUnsafe.
- *
- * Но сервер НИКОГДА не должен
- * доверять этим данным напрямую.
- */
-const telegramUser =
-  tg &&
-  tg.initDataUnsafe &&
-  tg.initDataUnsafe.user
-    ? tg.initDataUnsafe.user
-    : null;
-
-
-/* =====================================================
-   CONFIG
-===================================================== */
-
-
-/*
- * Здесь будет URL нашего Worker API.
- *
- * НЕ ставим сюда Apps Script.
- *
- * Worker будет:
- *
- * GitHub → Worker → Apps Script
- */
-const API_BASE =
-  "https://maria-hair-webhook.hamidullin123481.workers.dev";
-
-
-/* =====================================================
-   STATE
-===================================================== */
-
-let profile = null;
+/*************************************************
+ * STATE
+ *************************************************/
 
 let services = [];
 
@@ -987,1374 +1712,1150 @@ let selectedService = null;
 let selectedLength = null;
 
 
-/* =====================================================
-   API
-===================================================== */
+/*************************************************
+ * PAGE TITLES
+ *************************************************/
+
+const pageTitles = {
+
+  home: 'Главная',
+
+  passport: 'Hair Passport',
+
+  master: 'Карта мастера'
+
+};
 
 
-/*
- * Универсальный API-вызов.
- */
-async function api(
-  action,
-  params = {}
-) {
+/*************************************************
+ * SHOW PAGE
+ *************************************************/
 
-  if (!initData) {
+function showPage(page) {
 
-    throw new Error(
-      "Mini App открыт не внутри Telegram."
-    );
-  }
+  const pages = {
 
+    home:
+      document.getElementById('homePage'),
 
-  const response =
-    await fetch(
-      API_BASE + "/api",
-      {
+    passport:
+      document.getElementById('passportPage'),
 
-        method: "POST",
+    master:
+      document.getElementById('masterPage')
 
-        headers: {
-          "Content-Type":
-            "application/json"
-        },
-
-        body: JSON.stringify({
-
-          action,
-
-          initData,
-
-          params
-
-        })
-
-      }
-    );
+  };
 
 
-  if (!response.ok) {
+  Object.keys(pages).forEach(function(key) {
 
-    throw new Error(
-      "API HTTP " +
-      response.status
-    );
-  }
+    pages[key]
+      .classList
+      .remove('active');
 
-
-  const data =
-    await response.json();
+  });
 
 
-  if (!data || !data.ok) {
+  if (pages[page]) {
 
-    throw new Error(
-      data &&
-      data.error
-        ? data.error
-        : "API request failed."
-    );
-  }
-
-
-  return data;
-}
-
-
-/* =====================================================
-   INITIALIZATION
-===================================================== */
-
-async function init() {
-
-  initUser();
-
-  hideMasterForNow();
-
-  try {
-
-    await loadProfile();
-
-  } catch (error) {
-
-    console.error(
-      "Profile error:",
-      error
-    );
-
-    showStatus(
-      "profile-status",
-      "Не удалось загрузить профиль.",
-      true
-    );
+    pages[page]
+      .classList
+      .add('active');
 
   }
 
 
-  try {
+  document
+    .getElementById('pageTitle')
+    .textContent =
+      pageTitles[page] || 'Hair Passport';
 
-    await loadServices();
 
-  } catch (error) {
+  document
+    .querySelectorAll('.nav-button')
+    .forEach(function(button) {
 
-    console.error(
-      "Services error:",
-      error
+      button.classList.remove('active');
+
+    });
+
+
+  const activeButton =
+    document.querySelector(
+      '.nav-button[data-page="' +
+      page +
+      '"]'
     );
 
-    document.getElementById(
-      "services-container"
-    ).innerHTML =
 
-      '<div class="status error">' +
-      escapeHtml(
-        error.message ||
-        "Не удалось загрузить услуги."
-      ) +
-      '</div>';
+  if (activeButton) {
+
+    activeButton.classList.add('active');
 
   }
 
 
-  try {
+  window.scrollTo({
 
-    await loadBookings();
+    top: 0,
 
-  } catch (error) {
+    behavior: 'smooth'
 
-    console.error(
-      "Bookings error:",
-      error
-    );
-
-    document.getElementById(
-      "bookings-container"
-    ).innerHTML =
-
-      '<div class="status error">' +
-      escapeHtml(
-        error.message ||
-        "Не удалось загрузить записи."
-      ) +
-      '</div>';
-
-  }
+  });
 
 }
 
 
-/* =====================================================
-   USER
-===================================================== */
-
-function initUser() {
-
-  if (!telegramUser) {
-    return;
-  }
-
-
-  const firstName =
-    telegramUser.first_name ||
-    "Гость";
-
-
-  document.getElementById(
-    "welcome"
-  ).textContent =
-    "Привет, " +
-    firstName +
-    " 👋";
-
-
-  document.getElementById(
-    "passport-name"
-  ).textContent =
-    [
-      telegramUser.first_name,
-      telegramUser.last_name
-    ]
-      .filter(Boolean)
-      .join(" ");
-
-
-  const avatar =
-    document.getElementById(
-      "avatar"
-    );
-
-
-  if (telegramUser.photo_url) {
-
-    avatar.src =
-      telegramUser.photo_url;
-
-  } else {
-
-    avatar.style.display =
-      "none";
-
-  }
-
-}
-
-
-/* =====================================================
-   PROFILE
-===================================================== */
-
-async function loadProfile() {
-
-  const data =
-    await api(
-      "getProfile"
-    );
-
-
-  profile =
-    data.user || null;
-
-
-  if (
-    !profile ||
-    !data.registered
-  ) {
-
-    showStatus(
-      "profile-status",
-      "Профиль ещё не привязан к CRM.",
-      false
-    );
-
-    return;
-  }
-
-
-  document.getElementById(
-    "passport-name"
-  ).textContent =
-    [
-      profile.firstName,
-      profile.lastName
-    ]
-      .filter(Boolean)
-      .join(" ") ||
-    "—";
-
-
-  document.getElementById(
-    "passport-client-id"
-  ).textContent =
-    profile.clientId || "—";
-
-
-  document.getElementById(
-    "passport-last-visit"
-  ).textContent =
-    profile.lastVisit || "—";
-
-
-  document.getElementById(
-    "passport-visits"
-  ).textContent =
-    profile.visits ?? "0";
-
-
-  document.getElementById(
-    "master-last-visit"
-  ).textContent =
-    profile.lastVisit || "—";
-
-
-  document.getElementById(
-    "master-visits"
-  ).textContent =
-    profile.visits ?? "0";
-
-
-  document.getElementById(
-    "profile-status"
-  ).style.display =
-    "none";
-}
-
-
-/* =====================================================
-   SERVICES
-===================================================== */
+/*************************************************
+ * LOAD SERVICES
+ *************************************************/
 
 async function loadServices() {
 
-  const data =
-    await api(
-      "getServices"
+  const container =
+    document.getElementById(
+      'servicesList'
     );
 
 
-  services =
-    Array.isArray(data.services)
-      ? data.services
-      : [];
+  try {
+
+    if (
+      !API_URL ||
+      API_URL.includes('ВСТАВЬ_СЮДА')
+    ) {
+
+      throw new Error(
+        'Не указан API_URL в index.html'
+      );
+
+    }
 
 
-  renderServices();
+    const response =
+      await fetch(
+        API_URL +
+        '?action=services',
+        {
+          method: 'GET'
+        }
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        'API HTTP error: ' +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !data.success
+    ) {
+
+      throw new Error(
+        data.error ||
+        'API вернул ошибку'
+      );
+
+    }
+
+
+    services =
+      Array.isArray(data.services)
+        ? data.services
+        : [];
+
+
+    renderServices();
+
+
+  } catch (error) {
+
+    console.error(
+      'Services error:',
+      error
+    );
+
+
+    container.innerHTML = `
+
+      <div class="error">
+
+        Не удалось загрузить услуги.
+
+        <br><br>
+
+        Проверь подключение
+        к Google Apps Script.
+
+        <br><br>
+
+        <small>
+          ${escapeHtml(
+            error.message
+          )}
+        </small>
+
+      </div>
+
+    `;
+
+
+    document
+      .getElementById(
+        'servicesCount'
+      )
+      .textContent =
+        'Ошибка';
+
+  }
 
 }
 
 
-/*
- * Главная страница.
- */
+/*************************************************
+ * GROUP SERVICES
+ *************************************************/
+
+function groupServices(items) {
+
+  const groups = {};
+
+
+  items.forEach(function(item) {
+
+    const name =
+      item.service || 'Услуга';
+
+
+    if (!groups[name]) {
+
+      groups[name] = [];
+
+    }
+
+
+    groups[name].push(item);
+
+  });
+
+
+  return groups;
+
+}
+
+
+/*************************************************
+ * RENDER SERVICES
+ *************************************************/
+
 function renderServices() {
 
   const container =
     document.getElementById(
-      "services-container"
+      'servicesList'
     );
 
 
-  if (!services.length) {
+  const groups =
+    groupServices(services);
 
-    container.innerHTML =
-      '<div class="empty">' +
-      'Сейчас нет активных услуг.' +
-      '</div>';
+
+  const names =
+    Object.keys(groups);
+
+
+  document
+    .getElementById(
+      'servicesCount'
+    )
+    .textContent =
+      names.length +
+      ' ' +
+      pluralize(
+        names.length,
+        'услуга',
+        'услуги',
+        'услуг'
+      );
+
+
+  if (!names.length) {
+
+    container.innerHTML = `
+
+      <div class="loading">
+        Активных услуг пока нет.
+      </div>
+
+    `;
 
     return;
+
   }
 
 
-  /*
-   * Убираем дубли по названию услуги
-   * на главной странице.
-   *
-   * Длина будет показана
-   * после нажатия.
-   */
-  const unique =
-    new Map();
+  container.innerHTML = '';
 
 
-  services.forEach(function(item) {
+  names.forEach(function(name) {
 
-    const key =
-      String(
-        item.service || ""
-      ).trim();
+    const items =
+      groups[name];
 
 
-    if (
-      key &&
-      !unique.has(key)
-    ) {
-
-      unique.set(
-        key,
-        item
-      );
-
-    }
-
-  });
+    const card =
+      document.createElement('div');
 
 
-  container.innerHTML =
-    "";
+    card.className =
+      'service-card';
 
 
-  unique.forEach(
-    function(item) {
+    const first =
+      items[0];
 
-      const button =
-        document.createElement(
-          "button"
+
+    const main =
+      document.createElement('button');
+
+
+    main.className =
+      'service-main';
+
+
+    main.type =
+      'button';
+
+
+    main.innerHTML = `
+
+      <div>
+
+        <div class="service-name">
+          ${escapeHtml(name)}
+        </div>
+
+        <div class="service-subtitle">
+          ${items.length}
+          ${pluralize(
+            items.length,
+            'вариант',
+            'варианта',
+            'вариантов'
+          )}
+          по длине волос
+        </div>
+
+      </div>
+
+
+      <div class="service-arrow">
+        ↓
+      </div>
+
+    `;
+
+
+    main.addEventListener(
+      'click',
+      function() {
+
+        card.classList.toggle(
+          'open'
         );
-
-
-      button.type =
-        "button";
-
-
-      button.className =
-        "service-card";
-
-
-      const durations =
-        services
-          .filter(function(service) {
-
-            return normalize(
-              service.service
-            ) ===
-            normalize(
-              item.service
-            );
-
-          })
-          .map(function(service) {
-
-            return service.duration;
-
-          })
-          .filter(function(value) {
-
-            return value !== null &&
-                   value !== undefined;
-
-          });
-
-
-      const minDuration =
-        durations.length
-          ? Math.min(...durations)
-          : null;
-
-
-      const maxDuration =
-        durations.length
-          ? Math.max(...durations)
-          : null;
-
-
-      let durationText =
-        "";
-
-
-      if (
-        minDuration !== null &&
-        maxDuration !== null
-      ) {
-
-        durationText =
-          minDuration === maxDuration
-            ? minDuration + " мин"
-            : minDuration +
-              "–" +
-              maxDuration +
-              " мин";
 
       }
+    );
 
 
-      button.innerHTML =
-        '<div class="service-title">' +
-        escapeHtml(
-          item.service
-        ) +
-        '</div>' +
-
-        (
-          durationText
-            ? '<div class="service-meta">' +
-              escapeHtml(
-                durationText
-              ) +
-              '</div>'
-            : ""
-        );
+    const options =
+      document.createElement('div');
 
 
-      button.addEventListener(
-        "click",
+    options.className =
+      'service-options';
+
+
+    items.forEach(function(item) {
+
+      const option =
+        document.createElement('button');
+
+
+      option.type =
+        'button';
+
+
+      option.className =
+        'length-option';
+
+
+      option.innerHTML = `
+
+        <div class="length-left">
+
+          <div class="length-name">
+            ${formatLength(
+              item.length
+            )}
+          </div>
+
+          ${
+            item.description
+              ? `
+                <div class="length-description">
+                  ${escapeHtml(
+                    item.description
+                  )}
+                </div>
+              `
+              : ''
+          }
+
+        </div>
+
+
+        <div class="length-right">
+
+          <div class="length-price">
+            ${formatPrice(
+              item.price
+            )}
+          </div>
+
+          <div class="length-duration">
+            ${formatDuration(
+              item.duration
+            )}
+          </div>
+
+        </div>
+
+      `;
+
+
+      option.addEventListener(
+        'click',
         function() {
 
-          openBookingForService(
-            item.service
-          );
+          openServiceModal(item);
 
         }
       );
 
 
-      container.appendChild(
-        button
+      options.appendChild(option);
+
+    });
+
+
+    card.appendChild(main);
+
+    card.appendChild(options);
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/*************************************************
+ * OPEN SERVICE MODAL
+ *************************************************/
+
+function openServiceModal(item) {
+
+  selectedService =
+    item;
+
+
+  selectedLength =
+    item.length;
+
+
+  document
+    .getElementById(
+      'modalTitle'
+    )
+    .textContent =
+      item.service;
+
+
+  document
+    .getElementById(
+      'modalDescription'
+    )
+    .textContent =
+      item.description ||
+      'Персональная услуга для твоих волос.';
+
+
+  document
+    .getElementById(
+      'modalLength'
+    )
+    .textContent =
+      formatLength(
+        item.length
       );
 
-    }
-  );
 
-}
-
-
-/* =====================================================
-   BOOKINGS
-===================================================== */
-
-async function loadBookings() {
-
-  const data =
-    await api(
-      "getMyBookings"
-    );
+  document
+    .getElementById(
+      'modalPrice'
+    )
+    .textContent =
+      formatPrice(
+        item.price
+      );
 
 
-  renderBookings(
-    data.bookings || []
-  );
+  document
+    .getElementById(
+      'modalDuration'
+    )
+    .textContent =
+      formatDuration(
+        item.duration
+      );
 
-}
 
-
-function renderBookings(
-  bookings
-) {
-
-  const container =
+  const wearRow =
     document.getElementById(
-      "bookings-container"
+      'modalWearRow'
     );
 
 
-  if (!bookings.length) {
+  if (
+    item.wearPeriod
+  ) {
 
-    container.innerHTML =
-      '<div class="empty">' +
-      'Пока нет записей.' +
-      '</div>';
+    wearRow.style.display =
+      'flex';
 
-    return;
+
+    document
+      .getElementById(
+        'modalWear'
+      )
+      .textContent =
+        item.wearPeriod;
+
+  } else {
+
+    wearRow.style.display =
+      'none';
+
   }
 
 
-  container.innerHTML =
-    "";
-
-
-  bookings.forEach(
-    function(booking) {
-
-      const item =
-        document.createElement(
-          "div"
-        );
-
-
-      item.className =
-        "booking-list-item";
-
-
-      const dateTime =
-        [
-          booking.visitDate ||
-          booking.date,
-
-          booking.visitTime ||
-          booking.time
-        ]
-          .filter(Boolean)
-          .join(" · ");
-
-
-      item.innerHTML =
-
-        '<strong>' +
-        escapeHtml(
-          booking.service ||
-          "Услуга"
-        ) +
-        (
-          booking.hairLength
-            ? " — " +
-              escapeHtml(
-                booking.hairLength
-              )
-            : ""
-        ) +
-        '</strong>' +
-
-        '<div class="note">' +
-        escapeHtml(
-          dateTime || "Дата не указана"
-        ) +
-        '</div>' +
-
-        (
-          booking.price !== null &&
-          booking.price !== undefined
-            ? '<div style="margin-top:8px;font-weight:700;">' +
-              escapeHtml(
-                String(
-                  booking.price
-                )
-              ) +
-              '</div>'
-            : ""
-        );
-
-      container.appendChild(
-        item
-      );
-
-    }
-  );
+  document
+    .getElementById(
+      'serviceModal'
+    )
+    .classList
+    .add('open');
 
 }
 
 
-/* =====================================================
-   BOOKING
-===================================================== */
+/*************************************************
+ * CLOSE MODAL
+ *************************************************/
 
-function openBooking() {
-
-  selectedService =
-    null;
-
-  selectedLength =
-    null;
-
-
-  resetBookingModal();
-
+function closeModal() {
 
   document
     .getElementById(
-      "booking-modal"
+      'serviceModal'
     )
-    .classList.add("show");
-
-
-  renderBookingServices();
+    .classList
+    .remove('open');
 
 }
 
 
-function openBookingForService(
-  serviceName
-) {
+/*************************************************
+ * CLOSE MODAL ON BACKGROUND
+ *************************************************/
 
-  selectedService =
-    serviceName;
-
-
-  selectedLength =
-    null;
-
-
-  resetBookingModal();
-
-
-  document
-    .getElementById(
-      "booking-modal"
-    )
-    .classList.add("show");
-
-
-  showLengthStep();
-
-}
-
-
-function closeBooking(
+function closeModalFromBackground(
   event
 ) {
 
   if (
-    !event ||
     event.target.id ===
-      "booking-modal"
+    'serviceModal'
   ) {
+
+    closeModal();
+
+  }
+
+}
+
+
+/*************************************************
+ * BOOKING
+ *************************************************/
+
+function openBooking() {
+
+  /*
+   * На этом этапе просто открываем
+   * первую страницу и прокручиваем
+   * к услугам.
+   *
+   * В следующем этапе здесь появится
+   * настоящий booking flow.
+   */
+
+  showPage('home');
+
+
+  const section =
+    document.querySelector(
+      '#homePage .section'
+    );
+
+
+  if (section) {
+
+    section.scrollIntoView({
+      behavior: 'smooth'
+    });
+
+  }
+
+}
+
+
+/*************************************************
+ * BOOKING FROM SERVICE
+ *************************************************/
+
+function startBookingFromModal() {
+
+  if (!selectedService) {
+
+    return;
+
+  }
+
+
+  /*
+   * Пока не отправляем запись
+   * в Google Sheets.
+   *
+   * Следующим этапом здесь будет:
+   *
+   * услуга
+   * ↓
+   * дата
+   * ↓
+   * доступные блоки
+   * ↓
+   * подтверждение
+   * ↓
+   * Записи и Продажи
+   */
+
+
+  if (tg) {
+
+    try {
+
+      tg.HapticFeedback
+        .impactOccurred('light');
+
+    } catch (e) {}
+
+  }
+
+
+  closeModal();
+
+
+  showBookingComingSoon(
+    selectedService
+  );
+
+}
+
+
+/*************************************************
+ * BOOKING COMING SOON
+ *************************************************/
+
+function showBookingComingSoon(
+  item
+) {
+
+  const message =
+
+    item.service +
+    ' — ' +
+    formatLength(item.length) +
+    '\n\n' +
+
+    formatPrice(item.price) +
+    ' · ' +
+    formatDuration(item.duration) +
+    '\n\n' +
+
+    'Сейчас мы подключаем выбор даты и времени.';
+
+
+  if (tg) {
+
+    try {
+
+      tg.showAlert(
+        message
+      );
+
+      return;
+
+    } catch (e) {}
+
+  }
+
+
+  alert(message);
+
+}
+
+
+/*************************************************
+ * MASTER ACCESS
+ *************************************************/
+
+function setupMasterAccess() {
+
+  const masterButton =
+    document.getElementById(
+      'masterNav'
+    );
+
+
+  /*
+   * Если Telegram недоступен
+   * или ID мастера ещё не задан —
+   * скрываем вкладку.
+   */
+
+  if (
+    !tg ||
+    !tg.initDataUnsafe ||
+    !tg.initDataUnsafe.user
+  ) {
+
+    masterButton.style.display =
+      'none';
+
+    return;
+
+  }
+
+
+  const telegramUserId =
+    String(
+      tg.initDataUnsafe.user.id
+    );
+
+
+  if (
+    !MASTER_TELEGRAM_ID ||
+    String(
+      MASTER_TELEGRAM_ID
+    ) !== telegramUserId
+  ) {
+
+    masterButton.style.display =
+      'none';
+
+    return;
+
+  }
+
+
+  masterButton.style.display =
+    'block';
+
+}
+
+
+/*************************************************
+ * TELEGRAM USER
+ *************************************************/
+
+function setupTelegramUser() {
+
+  if (
+    !tg ||
+    !tg.initDataUnsafe ||
+    !tg.initDataUnsafe.user
+  ) {
+
+    return;
+
+  }
+
+
+  const user =
+    tg.initDataUnsafe.user;
+
+
+  const name =
+    [
+      user.first_name,
+      user.last_name
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+
+  if (name) {
 
     document
       .getElementById(
-        "booking-modal"
+        'passportName'
       )
-      .classList.remove(
-        "show"
-      );
+      .textContent =
+        name;
 
   }
 
-}
+
+  /*
+   * Telegram profile photo
+   */
+
+  if (
+    user.photo_url
+  ) {
+
+    const avatar =
+      document.getElementById(
+        'passportAvatar'
+      );
 
 
-function resetBookingModal() {
+    avatar.innerHTML = `
 
-  document.getElementById(
-    "booking-step-service"
-  ).style.display =
-    "block";
+      <img
+        src="${escapeAttribute(
+          user.photo_url
+        )}"
+        alt=""
+      >
 
+    `;
 
-  document.getElementById(
-    "booking-step-length"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-summary"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-status"
-  ).style.display =
-    "none";
-
-}
-
-
-function renderBookingServices() {
-
-  const container =
-    document.getElementById(
-      "booking-services"
-    );
-
-
-  container.innerHTML =
-    "";
-
-
-  const unique =
-    new Map();
-
-
-  services.forEach(
-    function(item) {
-
-      const key =
-        normalize(
-          item.service
-        );
-
-
-      if (
-        key &&
-        !unique.has(key)
-      ) {
-
-        unique.set(
-          key,
-          item
-        );
-
-      }
-
-    }
-  );
-
-
-  if (!unique.size) {
-
-    container.innerHTML =
-      '<div class="empty">' +
-      'Нет доступных услуг.' +
-      '</div>';
-
-    return;
   }
 
 
-  unique.forEach(
-    function(item) {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.type =
-        "button";
-
-
-      button.className =
-        "service-card";
-
-
-      button.innerHTML =
-        '<div class="service-title">' +
-        escapeHtml(
-          item.service
-        ) +
-        '</div>';
-
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          selectedService =
-            item.service;
-
-          selectedLength =
-            null;
-
-          showLengthStep();
-
-        }
-      );
-
-
-      container.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-function showLengthStep() {
-
-  document.getElementById(
-    "booking-step-service"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-length"
-  ).style.display =
-    "block";
-
-
-  document.getElementById(
-    "booking-step-summary"
-  ).style.display =
-    "none";
-
-
-  renderLengths();
-
-}
-
-
-function renderLengths() {
-
-  const container =
-    document.getElementById(
-      "length-options"
-    );
-
-
-  container.innerHTML =
-    "";
-
-
-  const matching =
-    services.filter(
-      function(item) {
-
-        return normalize(
-          item.service
-        ) ===
-        normalize(
-          selectedService
-        );
-
-      }
-    );
-
-
-  const unique =
-    new Map();
-
-
-  matching.forEach(
-    function(item) {
-
-      const length =
-        String(
-          item.hairLength || ""
-        ).trim();
-
-
-      if (
-        length &&
-        !unique.has(
-          normalize(length)
-        )
-      ) {
-
-        unique.set(
-          normalize(length),
-          item
-        );
-
-      }
-
-    }
-  );
-
-
-  if (!unique.size) {
-
-    container.innerHTML =
-      '<div class="empty">' +
-      'Для этой услуги длины пока не настроены.' +
-      '</div>';
-
-    return;
-  }
-
-
-  unique.forEach(
-    function(item) {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-
-      button.type =
-        "button";
-
-
-      button.className =
-        "length-button";
-
-
-      button.textContent =
-        prettyLength(
-          item.hairLength
-        );
-
-
-      button.addEventListener(
-        "click",
-        function() {
-
-          selectedLength =
-            item.hairLength;
-
-          showBookingSummary();
-
-        }
-      );
-
-
-      container.appendChild(
-        button
-      );
-
-    }
-  );
-
-}
-
-
-function showBookingSummary() {
-
-  const item =
-    services.find(
-      function(service) {
-
-        return (
-          normalize(
-            service.service
-          ) ===
-          normalize(
-            selectedService
-          ) &&
-
-          normalize(
-            service.hairLength
-          ) ===
-          normalize(
-            selectedLength
-          )
-        );
-
-      }
-    );
-
-
-  if (!item) {
-
-    showBookingError(
-      "Не удалось найти выбранную комбинацию услуги и длины."
-    );
-
-    return;
-  }
-
-
-  document.getElementById(
-    "booking-step-length"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-summary"
-  ).style.display =
-    "block";
-
-
-  const summary =
-    document.getElementById(
-      "booking-summary"
-    );
-
-
-  summary.innerHTML =
-
-    '<div class="row">' +
-      '<span class="label">Услуга</span>' +
-      '<span class="value">' +
-        escapeHtml(
-          item.service
-        ) +
-      '</span>' +
-    '</div>' +
-
-    '<div class="row">' +
-      '<span class="label">Длина</span>' +
-      '<span class="value">' +
-        escapeHtml(
-          prettyLength(
-            item.hairLength
-          )
-        ) +
-      '</span>' +
-    '</div>' +
-
-    '<div class="row">' +
-      '<span class="label">Длительность</span>' +
-      '<span class="value">' +
-        (
-          item.duration !== null &&
-          item.duration !== undefined
-            ? escapeHtml(
-                String(
-                  item.duration
-                )
-              ) + " мин"
-            : "—"
-        ) +
-      '</span>' +
-    '</div>' +
-
-    '<div class="price">' +
-      (
-        item.price !== null &&
-        item.price !== undefined
-          ? escapeHtml(
-              String(
-                item.price
-              )
-            )
-          : "Цена уточняется"
-      ) +
-    '</div>';
-
-}
-
-
-/*
- * Пока не создаём запись,
- * потому что ещё нет даты/времени.
- */
-function requestBooking() {
-
-  showBookingError(
-    "Следующим шагом подключаем выбор даты и времени."
-  );
-
-}
-
-
-function backToServices() {
-
-  document.getElementById(
-    "booking-step-length"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-summary"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-service"
-  ).style.display =
-    "block";
-
-
-  selectedService =
-    null;
-
-  selectedLength =
-    null;
-
-}
-
-
-function backToLengths() {
-
-  document.getElementById(
-    "booking-step-summary"
-  ).style.display =
-    "none";
-
-
-  document.getElementById(
-    "booking-step-length"
-  ).style.display =
-    "block";
-
-}
-
-
-/* =====================================================
-   MASTER
-===================================================== */
-
-
-/*
- * Пока скрываем вкладку мастера.
- *
- * Позже сервер будет возвращать роль.
- */
-function hideMasterForNow() {
-
-  const masterTab =
-    document.getElementById(
-      "master-tab"
-    );
-
-
-  masterTab.style.display =
-    "none";
-
-
-  document.getElementById(
-    "page-master"
-  ).classList.remove(
-    "active"
-  );
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function showPage(
-  page,
-  button
-) {
+  /*
+   * Пока показываем Telegram
+   * имя как базовую информацию.
+   *
+   * Позже заменим это
+   * данными из листа "Клиенты".
+   */
 
   document
-    .querySelectorAll(
-      ".page"
+    .getElementById(
+      'passportCaption'
     )
-    .forEach(
-      function(element) {
-
-        element.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  const target =
-    document.getElementById(
-      "page-" + page
-    );
-
-
-  if (!target) {
-    return;
-  }
-
-
-  target.classList.add(
-    "active"
-  );
-
-
-  document
-    .querySelectorAll(
-      ".tab"
-    )
-    .forEach(
-      function(element) {
-
-        element.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-
-  button.classList.add(
-    "active"
-  );
-
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
+    .textContent =
+      'Telegram-профиль';
 
 }
 
 
-/* =====================================================
-   UI HELPERS
-===================================================== */
+/*************************************************
+ * FORMAT LENGTH
+ *************************************************/
 
-function showStatus(
-  elementId,
-  message,
-  isError
-) {
+function formatLength(length) {
 
-  const element =
-    document.getElementById(
-      elementId
-    );
+  const labels = {
 
+    'extra-short':
+      'Экстра-короткие',
 
-  if (!element) {
-    return;
-  }
+    'short':
+      'Короткие',
 
+    'middle':
+      'Средние',
 
-  element.textContent =
-    message;
+    'long':
+      'Длинные',
 
-
-  element.className =
-    "status" +
-    (
-      isError
-        ? " error"
-        : ""
-    );
-
-
-  element.style.display =
-    "block";
-
-}
-
-
-function showBookingError(
-  message
-) {
-
-  showStatus(
-    "booking-status",
-    message,
-    false
-  );
-
-}
-
-
-function normalize(
-  value
-) {
-
-  return String(
-    value || ""
-  )
-    .trim()
-    .toLowerCase()
-    .replace(
-      /\s+/g,
-      " "
-    );
-
-}
-
-
-function prettyLength(
-  value
-) {
-
-  const map = {
-
-    "extra-short":
-      "Очень короткие",
-
-    "short":
-      "Короткие",
-
-    "middle":
-      "Средние",
-
-    "medium":
-      "Средние",
-
-    "long":
-      "Длинные",
-
-    "extra":
-      "Очень длинные"
+    'extra':
+      'Экстра-длинные'
 
   };
 
 
   const key =
-    normalize(
-      value
-    );
+    String(length || '')
+      .trim()
+      .toLowerCase();
 
 
-  return map[key] ||
-    String(
-      value || ""
+  return labels[key] ||
+    length ||
+    'Длина не указана';
+
+}
+
+
+/*************************************************
+ * FORMAT PRICE
+ *************************************************/
+
+function formatPrice(price) {
+
+  if (
+    price === null ||
+    price === undefined ||
+    price === ''
+  ) {
+
+    return 'Цена уточняется';
+
+  }
+
+
+  const number =
+    Number(price);
+
+
+  if (
+    isNaN(number)
+  ) {
+
+    return String(price);
+
+  }
+
+
+  return '$' +
+    number.toLocaleString(
+      'en-US',
+      {
+        maximumFractionDigits: 2
+      }
     );
 
 }
 
+
+/*************************************************
+ * FORMAT DURATION
+ *************************************************/
+
+function formatDuration(
+  duration
+) {
+
+  if (
+    duration === null ||
+    duration === undefined ||
+    duration === ''
+  ) {
+
+    return 'Время уточняется';
+
+  }
+
+
+  const minutes =
+    Number(duration);
+
+
+  if (
+    isNaN(minutes)
+  ) {
+
+    return String(duration);
+
+  }
+
+
+  const hours =
+    Math.floor(
+      minutes / 60
+    );
+
+
+  const rest =
+    minutes % 60;
+
+
+  if (
+    hours === 0
+  ) {
+
+    return minutes +
+      ' мин';
+
+  }
+
+
+  if (
+    rest === 0
+  ) {
+
+    return hours +
+      ' ч';
+
+  }
+
+
+  return hours +
+    ' ч ' +
+    rest +
+    ' мин';
+
+}
+
+
+/*************************************************
+ * PLURALIZE
+ *************************************************/
+
+function pluralize(
+  number,
+  one,
+  few,
+  many
+) {
+
+  const n =
+    Math.abs(number) % 100;
+
+
+  const n1 =
+    n % 10;
+
+
+  if (
+    n > 10 &&
+    n < 20
+  ) {
+
+    return many;
+
+  }
+
+
+  if (
+    n1 > 1 &&
+    n1 < 5
+  ) {
+
+    return few;
+
+  }
+
+
+  if (
+    n1 === 1
+  ) {
+
+    return one;
+
+  }
+
+
+  return many;
+
+}
+
+
+/*************************************************
+ * ESCAPE HTML
+ *************************************************/
 
 function escapeHtml(
   value
 ) {
 
   return String(
-    value ?? ""
+    value ?? ''
   )
     .replace(
       /&/g,
-      "&amp;"
+      '&amp;'
     )
     .replace(
       /</g,
-      "&lt;"
+      '&lt;'
     )
     .replace(
       />/g,
-      "&gt;"
+      '&gt;'
     )
     .replace(
       /"/g,
-      "&quot;"
+      '&quot;'
     )
     .replace(
       /'/g,
-      "&#039;"
+      '&#039;'
     );
 
 }
 
 
-/* =====================================================
-   START
-===================================================== */
+/*************************************************
+ * ESCAPE ATTRIBUTE
+ *************************************************/
 
-init();
+function escapeAttribute(
+  value
+) {
+
+  return escapeHtml(
+    value
+  );
+
+}
+
+
+/*************************************************
+ * INITIALIZE APP
+ *************************************************/
+
+document.addEventListener(
+  'DOMContentLoaded',
+  function() {
+
+    setupTelegramUser();
+
+    setupMasterAccess();
+
+    loadServices();
+
+  }
+);
 
 </script>
 
+
 </body>
+
 </html>
